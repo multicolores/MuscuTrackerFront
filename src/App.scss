@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Montserrat:wght@400;500;600;900&display=swap");
+@import "./styles/variables";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: $bg_color;
+  color: $font_color;
+  font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  @media (max-width: 400px) {
+    font-size: 2em !important;
+  }
+}
+input {
+  font-family: "Montserrat", sans-serif !important;
+}
+nav {
+  padding: 2vh 10vw;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    color: $font_color;
+    text-decoration: none;
+  }
+  .logo {
+    font-size: 2em;
+    font-weight: 900;
+  }
+  div {
+    a {
+      margin-left: 4vw;
+      font-size: 1.1em;
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -10%;
+        left: 0;
+        width: 100%;
+        height: 15%;
+        background: $primary_color;
+        transform: scale3d(0.001, 1, 1);
+        opacity: 0;
+        transform-origin: 100% 50%;
+        transition: transform 0.3s cubic-bezier(0.2, 1, 0.3, 1),
+          opacity 0.1s 0.2s linear;
+      }
+      &:hover {
+        &::after {
+          opacity: 1;
+          transform: scale3d(1, 1, 1);
+          transform-origin: 0% 50%;
+          transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1),
+            opacity 0.1s linear;
+        }
+      }
+    }
+    @media (max-width: 400px) {
+      width: 70%;
+    }
+  }
+}
+.borderButton {
+  background: $bg_color !important;
+  border-radius: 0 !important;
+  border: 2px solid $font_color !important;
+  font-weight: 700 !important;
+  font-family: "Montserrat", sans-serif !important;
+  color: $font_color !important;
+  &::after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    width: 100%;
+    height: 100%;
+    border: 2px solid $font_color;
+    background: $bg_color;
+    transition: 0.3s;
+  }
+}
+.gradientButton {
+  background: $gradient !important;
+  color: $bg_color !important;
+  font-weight: 900 !important;
+  padding: 12px 25px !important;
+}
+
+.simpleBorderButton {
+  background: rgba(255, 0, 0, 0) !important;
+  color: $bg_color !important;
+  border: 2px solid $font_color !important;
+  text-transform: none !important;
+  border-radius: 0 !important;
+  font-family: "Montserrat", sans-serif !important;
+  font-size: 1em !important;
+}
+.underlineButton {
+  font-family: "Montserrat", sans-serif !important;
+  text-transform: none !important;
+  background: rgba(255, 0, 0, 0) !important;
+  color: $font_color !important;
+  border-radius: 0 !important;
+  border: none !important;
+  font-size: 1em !important;
+  border-bottom: 2px solid $font_color !important;
+}
+.contactPage_Container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .registerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 30%;
+    gap: 15px;
+    background: rgb(228, 225, 225);
+    border-radius: 5px;
+    padding: 5%;
+    div {
+      width: 100%;
+    }
+    h1 {
+      margin-bottom: 5%;
+    }
+    button {
+      margin-top: 5%;
+    }
+  }
+}
