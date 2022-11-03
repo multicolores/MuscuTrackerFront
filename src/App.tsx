@@ -3,6 +3,9 @@ import "./App.scss";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import logo from "./logo.svg";
 import HomePage from "./Pages/home-page";
+import Login from "./Pages/login-page";
+import Register from "./Pages/register-page";
+
 function App() {
   return (
     <Router>
@@ -14,6 +17,8 @@ function App() {
         </nav>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
     </Router>
