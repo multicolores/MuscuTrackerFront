@@ -5,6 +5,7 @@ import logo from "./logo.svg";
 import HomePage from "./Pages/home-page";
 import Login from "./Pages/login-page";
 import Register from "./Pages/register-page";
+import MainPage from "./Pages/main-page";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/main" element={<MainPage />} />
         </Routes>
       </div>
     </Router>
