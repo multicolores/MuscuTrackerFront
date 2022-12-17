@@ -70,6 +70,7 @@ function Login() {
           <TextField
             label="Password"
             variant="standard"
+            type="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
