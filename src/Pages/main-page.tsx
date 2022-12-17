@@ -19,8 +19,6 @@ function MainPage() {
   const [error, setError] = useState(null);
 
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  // const [workouts, setWorkouts] = useState([]);
-  // const [errorWorkout, setErrorWorkout] = useState(null);
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
@@ -29,26 +27,29 @@ function MainPage() {
 
   useEffect(() => {
     // User data fetching here
-    // maybe see if there is user cookie or redirection to login
-    let userData = {
-      user: {
-        _id: "62271f84379a40512d62e9e4",
-        name: "Florian",
-        email: "test@gmail.com",
-        password:
-          "$2a$10$w9lfmlpdMtqendmPQNujfeb5WSMYqMtjP2G./ZE9RcPNu5KLrE..W",
-        createdAt: "2022-03-08T09:19:00.497Z",
-        updatedAt: "2022-09-22T17:29:53.740Z",
-        __v: 0,
-        workout: ["632c9b91e3a845ce70f64214"],
-      },
-      token: { _id: "62271f84379a40512d62e9e4", iat: 1667484106 },
-    };
-    setData(userData);
-    setWorkout(userData.user.workout);
-    setLoading(false);
-
-    console.log(userData);
+    axios
+      .get("http://localhost:8080/user", {
+        headers: {
+          "auth-token": cookies.user,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data);
+        setUserinfo(res.data.user);
+        setWorkout(res.data.user.workout);
+        console.log(res.data.user.workout);
+        setError(null);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setError(err.message);
+        setData(null);
+        navigate("/login", { state: data });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   const navigate = useNavigate();
@@ -57,9 +58,9 @@ function MainPage() {
   };
 
   function Logout() {
-    // if (cookies.user) {
-    //   removeCookie("user");
-    // }
+    if (cookies.user) {
+      removeCookie("user");
+    }
     navigate("/login");
   }
   return (
