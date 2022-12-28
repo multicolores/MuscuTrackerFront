@@ -42,50 +42,27 @@ function Workout(props: any) {
 
   function fetchTrainingsData() {
     console.log(" --------- FETCH --------");
-    let workoutMock = {
-      _id: "632c9b91e3a845ce70f64214",
-      name: "Test",
-      exercise: [
-        {
-          name: "Dips",
-          repetition: [["0", "2m30", 1, 2, 4, 5, 5], ""],
-          recuperation: "2m30",
-          weight: "0",
-          _id: "632c9b91e3a845ce70f64215",
-        },
-      ],
-      training: [],
-      description: "Description de la scéance",
-      date: "2022-09-22T17:29:53.524Z",
-      __v: 0,
-    };
-    setData(workoutMock);
-    setLoading(false);
-    // axios
-    //   .get("http://localhost:8080/workout/" + workout_id, {
-    //     headers: {
-    //       "auth-token": cookies.user,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     //   console.log(res.data);
-    //     setData(res.data);
-    //     // console.log(res.data);
-    //     setError(null);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //     setError(err.message);
-    //     setData(null);
-    //   })
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
+    axios
+    .get("http://localhost:8080/workout/" + workout_id, {
+      headers: {
+        "auth-token": cookies.user,
+      },
+    })
+    .then((res) => {
+      setData(res.data);
+      setError(null);
+    })
+    .catch((err) => {
+      console.log(err.message);
+      setError(err.message);
+      setData(null);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
   }
 
   function ShowExercises() {
-    // https://flaviocopes.com/react-how-to-loop/
-
     let items = [];
     for (let i = 0; i < data.exercise.length; i++) {
       console.log(data.exercise[i].name);
