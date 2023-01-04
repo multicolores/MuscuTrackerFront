@@ -49,8 +49,18 @@ function Login() {
           });
         } else if (error.request) {
           console.log(error.request);
+          setNotify({
+            isOpen: true,
+            message: "Erreur, merci de remplire tous les champs correctement",
+            type: "error",
+          });
         } else {
           console.log("Error", error.message);
+          setNotify({
+            isOpen: true,
+            message: "Erreur, merci de remplire tous les champs correctement",
+            type: "error",
+          });
         }
       });
   }

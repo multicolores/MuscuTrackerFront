@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import Notification from "../components/materialUI/Notification";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import "../styles/login_register.scss";
 
 function Register() {
+  const captchaRef = useRef<ReCAPTCHA>(null);
   const [name, setName] = useState<String | null>(null);
   const [email, setEmail] = useState<String | null>(null);
   const [password, setPassword] = useState<String | null>(null);
@@ -27,33 +29,51 @@ function Register() {
       password: password,
     };
     console.log(jsonRegisterInfo);
-
-    axios
-      .post(`http://localhost:8080/register`, {
-        name: name,
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        console.log(res.data);
-        navigate("/login");
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          setNotify({
-            isOpen: true,
-            message: "Error" + " : " + error.response.data,
-            type: "error",
-          });
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log("Error", error.message);
-        }
+    if (captchaRef.current && captchaRef.current.getValue()) {
+      axios
+        .post(`http://localhost:8080/register`, {
+          name: name,
+          email: email,
+          password: password,
+        })
+        .then((res) => {
+          console.log(res.data);
+          navigate("/login");
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            setNotify({
+              isOpen: true,
+              message: "Error" + " : " + error.response.data,
+              type: "error",
+            });
+          } else if (error.request) {
+            console.log(error.request);
+            setNotify({
+              isOpen: true,
+              message: "Erreur, merci de remplire tous les champs correctement",
+              type: "error",
+            });
+          } else {
+            console.log("Error", error.message);
+            setNotify({
+              isOpen: true,
+              message: "Error" + " : " + error.message,
+              type: "error",
+            });
+          }
+        });
+    } else {
+      setNotify({
+        isOpen: true,
+        message: "Merci de montrer que vous n'etes pas un robot.",
+        type: "error",
       });
+    }
   }
+
   return (
     <div>
       <div className="contactPage_Container">
@@ -96,6 +116,12 @@ function Register() {
               Register
             </Button>
           </div>
+        </div>
+        <div className="reCaptchaContainer">
+          <ReCAPTCHA
+            sitekey="6LcmRc0jAAAAAIdmDUqh_y8G5-N3BJKZoZnp-nmn"
+            ref={captchaRef}
+          />
         </div>
       </div>
       <Notification notify={notify} setNotify={setNotify} />
