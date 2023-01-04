@@ -60,12 +60,7 @@ function CreateWorkout() {
     };
     console.log(workoutObject);
 
-    //TODO now create and import funciton to create a new workout ( form services folder ) with in param workoutObject
-    // il vas falloir créer un workout et prendre l'id pour l'ajouter aux user's workouts ids
-    // arguments in function : (user, workoutObject)
-
     if (createWorkout(user, workoutObject, cookies.user)) {
-      // alert("Workout created !");
       setNotify({
         isOpen: true,
         message: "Workout created !",
@@ -105,7 +100,7 @@ function CreateWorkout() {
     <div className="creatWorkout_container">
       <div className="headerContainer">
         <h1>Create a workout</h1>
-        <Link to="/mainpage" className="btGoBackMainPage">
+        <Link to="/main" className="btGoBackMainPage">
           <Button variant="contained" className="gradientButton">
             Go Back to main page
           </Button>
