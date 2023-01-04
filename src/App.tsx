@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import logo from "./logo.svg";
+import logo from "./images/logo.png";
 import HomePage from "./Pages/home-page";
 import Login from "./Pages/login-page";
 import Register from "./Pages/register-page";
@@ -13,7 +13,8 @@ function App() {
     <Router>
       <div className="App">
         <nav>
-          <Link to="/" className="logo">
+          <Link to="/" className="logo_container">
+            <img src={logo} alt="lgoo de l'application" className="logo" />
             Muscu App
           </Link>
         </nav>
