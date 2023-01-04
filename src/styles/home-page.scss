@@ -1,8 +1,31 @@
 .homePage_container {
-  header {
-    margin-top: 20vh;
-    padding: 0 15vw;
+  position: relative;
+  height: 92vh;
+  background-color: #181817;
+  padding: 0;
+  margin: 0;
+  .background_image_container {
+    margin-top: 0vh;
+    height: 90%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: hidden;
     @media (max-width: 400px) {
+      height: auto;
+      width: 100%;
+      top: 50vh;
+    }
+  }
+  header {
+    position: relative;
+    z-index: 2;
+    color: white;
+    padding: 0 10vw;
+    width: 80vw;
+    padding-top: 20vh;
+    @media (max-width: 400px) {
+      margin-top: 20vh;
       padding: 2vh 5vw;
     }
     h1 {
@@ -15,6 +38,16 @@
       .borderButton {
         font-size: 1.1em;
         padding: 10px 30px;
+      }
+    }
+    .borderButton {
+      background-color: #181817 !important;
+      color: white !important;
+      border-color: white !important;
+      &::after {
+        border: 2px solid white;
+        background: #181817;
+        transition: 0.3s;
       }
     }
   }
