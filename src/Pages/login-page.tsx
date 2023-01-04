@@ -35,7 +35,7 @@ function Login() {
       })
       .then((res) => {
         setACookie(res.data);
-        navigate("/mainpage");
+        navigate("/main");
       })
       .catch((error) => {
         console.error(error);
