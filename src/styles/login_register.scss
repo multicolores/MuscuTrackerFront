@@ -1,75 +1,103 @@
 @import "variables";
 
 .contactPage_Container {
-  height: 90vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: $font_color;
-  // color: $bg_color;
-  .registerContainer {
+    height: 92vh;
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    width: 30vw;
-    gap: 15px;
-    // background: $font_color;
-    background: $bg_color;
-    border: 3px solid $font_color;
-    border-radius: 20px;
-    padding: 4% 5%;
-    @media (max-width: 400px) {
-      width: 80vw;
+    color: $font_color;
+    background-color: $font_color;
+    // color: $bg_color;
+    .registerContainer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 30vw;
+        gap: 15px;
+        // background: $font_color;
+        background: $bg_color;
+        // border: 3px solid $font_color;
+        border-radius: 20px;
+        padding: 4% 5%;
+        z-index: 2;
+        position: relative;
+        box-shadow: 0 0.375em 0 $font_color;
+        @media (max-width: 400px) {
+            width: 80vw;
+        }
+        div {
+            width: 100%;
+        }
+        h1 {
+            margin-bottom: 5%;
+            width: 100%;
+            text-align: center;
+        }
+        input {
+            color: $font_color !important;
+        }
+        label {
+            color: $font_color !important;
+        }
+        .button_container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: 7%;
+            button {
+                margin-top: 5%;
+                text-transform: none;
+                background: rgba(255, 255, 255, 0);
+                border-radius: 0px;
+                color: $font_color;
+                // color: $bg_color;
+                box-shadow: none;
+            }
+            a {
+                text-decoration: none;
+                padding: 0;
+                margin: 0;
+            }
+            .loginButton {
+                border: 2px solid $font_color;
+            }
+            .registerButton {
+                border: none;
+                padding: 1em 5px;
+                @include transition;
+                transform: translateY(0.5em);
+
+                &:after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0.5em;
+                    height: 2px;
+                    background-color: $font_color;
+                    width: 100%;
+                    @include transition;
+                }
+                &:hover {
+                    transform: translateY(0.1em);
+                    &:after {
+                        bottom: 0.3em;
+                    }
+                }
+            }
+            .multiRoundedButton {
+                background: $bg_color !important;
+                border: 2px solid $font_color !important;
+                color: $font_color !important;
+            }
+        }
     }
-    div {
-      width: 100%;
+
+    .reCaptchaContainer {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
     }
-    h1 {
-      margin-bottom: 5%;
-      width: 100%;
-      text-align: center;
-    }
-    input {
-      color: $font_color !important;
-    }
-    label {
-      color: $font_color !important;
-    }
-    .button_container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding-top: 7%;
-      button {
-        margin-top: 5%;
-        text-transform: none;
-        background: rgba(255, 255, 255, 0);
-        border-radius: 0px;
-        color: $font_color;
-        // color: $bg_color;
-        box-shadow: none;
-      }
-      a {
-        text-decoration: none;
-        padding: 0;
-        margin: 0;
-      }
-      .loginButton {
-        border: 2px solid $font_color;
-      }
-      .registerButton {
-        border: none;
-        border-bottom: 2px solid $font_color;
-        padding: 1% 0;
-      }
-    }
-  }
-  
-  .reCaptchaContainer {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 }

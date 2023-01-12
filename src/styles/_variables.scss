@@ -2,6 +2,21 @@ $bg_color: #eeebeb;
 $font_color: #1a1a1b;
 // $bg_color: #1B1C1E;
 // $font_color: #dfdddd;
-$primary_color: #81B1FA;
-$secondary_color: #EDAEF9;
-$gradient: linear-gradient(231deg, rgba(129,177,250,1) 0%, rgba(237,174,249,1) 100%);
+$primary_color: #0d88ec;
+$primary_color2: #f9dcc4;
+// $primary_color: #81B1FA;
+$secondary_color: #edaef9;
+$gradient: linear-gradient(
+    231deg,
+    rgba(129, 177, 250, 1) 0%,
+    rgba(237, 174, 249, 1) 100%
+);
+
+$ease_out: cubic-bezier(0.165, 0.84, 0.44, 1);
+@mixin transition() {
+    transition: 700ms $ease_out !important;
+
+    &:hover {
+        transition: 400ms $ease_out !important;
+    }
+}
