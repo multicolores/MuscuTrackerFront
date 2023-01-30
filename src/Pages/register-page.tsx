@@ -32,7 +32,7 @@ function Register() {
         console.log(jsonRegisterInfo);
         if (captchaRef.current && captchaRef.current.getValue()) {
             axios
-                .post(`http://localhost:8080/register`, {
+                .post(process.env.REACT_APP_API_URL+`/register`, {
                     name: name,
                     email: email,
                     password: password,

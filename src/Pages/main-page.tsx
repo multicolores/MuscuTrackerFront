@@ -28,7 +28,7 @@ function MainPage() {
   useEffect(() => {
     // User data fetching here
     axios
-      .get("http://localhost:8080/user", {
+      .get(process.env.REACT_APP_API_URL+"/user", {
         headers: {
           "auth-token": cookies.user,
         },

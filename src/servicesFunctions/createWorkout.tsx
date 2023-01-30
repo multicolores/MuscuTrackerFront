@@ -22,7 +22,7 @@ export function createWorkout(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(workoutToCreate),
   };
-  fetch("http://localhost:8080/workout", requestOptions)
+  fetch(process.env.REACT_APP_API_URL+"/workout", requestOptions)
     .then(async (response) => {
       const isJson = response.headers
         .get("content-type")
@@ -61,7 +61,7 @@ async function addNewUserWorkout(user: any, workoutInfo: any, token: any) {
     },
   };
   let res = await axios.patch(
-    "http://localhost:8080/user/" + user._id,
+    process.env.REACT_APP_API_URL+"/user/" + user._id,
     { workout: actualUserWorkoutsArray },
     options
   );

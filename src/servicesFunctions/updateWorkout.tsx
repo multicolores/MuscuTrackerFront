@@ -25,7 +25,7 @@ export async function updateWorkout(
   //  }
 
   let res = await axios.patch(
-    "http://localhost:8080/workout/" + workoutData._id,
+    process.env.REACT_APP_API_URL+"/workout/" + workoutData._id,
     { exercise: workoutData.exercise }
   );
   return res.data;

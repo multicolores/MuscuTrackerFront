@@ -30,7 +30,7 @@ function Login() {
 
     function RegisterPostRequest() {
         axios
-            .post(`http://localhost:8080/login`, {
+            .post(process.env.REACT_APP_API_URL+`/login`, {
                 email: email,
                 password: password,
             })
