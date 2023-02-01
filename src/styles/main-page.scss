@@ -1,0 +1,44 @@
+.header-main-page-container {
+    padding: 10vh 10vw;
+    background-color: white;
+    @media (max-width: 400px) {
+        margin-top: 25vh;
+        padding: 0vh 5vw;
+    }
+    h1 {
+        font-size: 4vw;
+        @media (max-width: 400px) {
+            font-size: 3em !important;
+        }
+    }
+    .btAddTraining {
+        position: absolute;
+        top: 20vh;
+        right: 15vw;
+        @media (max-width: 400px) {
+            right: 5vw;
+        }
+    }
+    .btLogout {
+        background: rgba(0, 0, 0, 0);
+        position: absolute;
+        top: 2vh;
+        right: 1vw;
+        z-index: 5;
+        color: black !important;
+        border: none !important;
+        font-family: "Montserrat", sans-serif !important;
+        font-size: 1em !important;
+        text-transform: none !important;
+        &:hover {
+            background-color: rgba(0, 0, 0, 0);
+        }
+        // border-radius: 5px !important;
+        @media (max-width: 400px) {
+            top: 11vh;
+        }
+    }
+    .MuiSvgIcon-root {
+        font-size: 1.3em;
+    }
+}
