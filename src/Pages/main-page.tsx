@@ -59,6 +59,35 @@ function MainPage() {
         navigate("/create-workouts", { state: data });
     };
 
+    function reloadDatas() {
+        axios
+            .get(process.env.REACT_APP_API_URL + "/user", {
+                headers: {
+                    "auth-token": cookies.user,
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+                setData(res.data);
+                setUserinfo(res.data.user);
+                setWorkout(res.data.user.workout);
+                console.log(res.data.user.workout);
+                // if (res.data.user.workout.length > 0) {
+                //   getWorkouts(res.data.user.workout);
+                // }
+                // console.log(workouts);
+                setError(null);
+            })
+            .catch((err) => {
+                console.log(err.message);
+                setError(err.message);
+                setData(null);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }
+
     function Logout() {
         if (cookies.user) {
             removeCookie("user");
@@ -119,6 +148,7 @@ function MainPage() {
                                         key={id}
                                         user={data.user}
                                         notify={notify}
+                                        reloadDatas={reloadDatas}
                                         setNotify={setNotify}
                                     />
                                 ))}

@@ -12,6 +12,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import "./WorkoutStyle.scss";
 import ConfirmDialog from "./materialUI/ConfirmDialog";
 import AddTrainingDialog from "./materialUI/AddTrainingDialog";
+import { deleteWorkout } from "../servicesFunctions/deleteWorkout";
 
 function Workout(props: any) {
     const [cookies, setCookie] = useCookies(["user"]);
@@ -25,7 +26,9 @@ function Workout(props: any) {
         isOpen: false,
         title: "",
         subTitle: "",
-        onConfirm: null,
+        onConfirm: () => {
+            buttonDeleteWorkout();
+        },
     });
     const [addTrainingDialog, setAddTrainingDialog] = useState({
         isOpen: false,
@@ -108,28 +111,33 @@ function Workout(props: any) {
         return repRow;
     }
 
-    // function buttonDeleteWorkout() {
-    //   setConfirmDialog({
-    //     ...confirmDialog,
-    //     isOpen: false,
-    //   });
+    function buttonDeleteWorkout() {
+        console.log("ok");
 
-    //   let res = deleteWorkout(props.user, data._id, cookies.user);
-    //   if (res) {
-    //     props.setNotify({
-    //       isOpen: true,
-    //       message: "Workout Supprimer",
-    //       type: "success",
-    //     });
-    //     props.reloadDatas();
-    //   } else {
-    //     props.setNotify({
-    //       isOpen: true,
-    //       message: "something went wrong, please try again",
-    //       type: "error",
-    //     });
-    //   }
-    // }
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false,
+        });
+
+        const deleteCall = async () => {
+            let res = await deleteWorkout(props.user, data._id, cookies.user);
+            if (res) {
+                props.setNotify({
+                    isOpen: true,
+                    message: "Workout Supprimer",
+                    type: "success",
+                });
+                props.reloadDatas();
+            } else {
+                props.setNotify({
+                    isOpen: true,
+                    message: "something went wrong, please try again",
+                    type: "error",
+                });
+            }
+        };
+        deleteCall();
+    }
 
     return (
         <div className="workoutContainer">
@@ -148,16 +156,16 @@ function Workout(props: any) {
                         <IconButton
                             aria-label="delete"
                             className="deleteIcon"
-                            // onClick={() => {
-                            //   setConfirmDialog({
-                            //     isOpen: true,
-                            //     title: "Do you really want to delete this workout ?",
-                            //     subTitle: "",
-                            //     onConfirm: () => {
-                            //       buttonDeleteWorkout();
-                            //     },
-                            //   });
-                            // }}
+                            onClick={() => {
+                                setConfirmDialog({
+                                    isOpen: true,
+                                    title: "Do you really want to delete this workout ?",
+                                    subTitle: "",
+                                    onConfirm: () => {
+                                        buttonDeleteWorkout();
+                                    },
+                                });
+                            }}
                         >
                             <DeleteIcon />
                         </IconButton>
@@ -173,7 +181,10 @@ function Workout(props: any) {
                             </span>
                             <div className="exoInfo_container">
                                 {data.exercise.map((exercise: any) => (
-                                    <div className="exoInfo">
+                                    <div
+                                        className="exoInfo"
+                                        key={Math.random()}
+                                    >
                                         <li>{exercise.name}</li>
                                         <span>
                                             {exercise.repetition.length}{" "}
