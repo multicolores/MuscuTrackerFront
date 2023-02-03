@@ -21,6 +21,10 @@ function MainPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const [allWorkoutsDatas, setAllWorkoutsDatas] = useState<any>([]);
+    const [allWorkoutsLoading, setAllWorkoutsLoading] = useState(true);
+    const [allWorkoutsError, setAllWorkoutsError] = useState(null);
+
     const [cookies, setCookie, removeCookie] = useCookies(["user"]);
     const [notify, setNotify] = useState({
         isOpen: false,
@@ -40,6 +44,7 @@ function MainPage() {
                 setData(res.data);
                 setUserinfo(res.data.user);
                 setWorkout(res.data.user.workout);
+                fetchAllWorkoutsData(res.data.user.workout);
                 setError(null);
             })
             .catch((err) => {
@@ -69,10 +74,7 @@ function MainPage() {
                 setData(res.data);
                 setUserinfo(res.data.user);
                 setWorkout(res.data.user.workout);
-                // if (res.data.user.workout.length > 0) {
-                //   getWorkouts(res.data.user.workout);
-                // }
-                // console.log(workouts);
+
                 setError(null);
             })
             .catch((err) => {
@@ -90,6 +92,36 @@ function MainPage() {
         }
         navigate("/login");
     }
+
+    const fetchAllWorkoutsData = (workoutsIds: string[]) => {
+        setAllWorkoutsDatas([]);
+        workoutsIds.map((workoutId) => {
+            // console.log(workoutId);
+            axios
+                .get(process.env.REACT_APP_API_URL + "/workout/" + workoutId, {
+                    headers: {
+                        "auth-token": cookies.user,
+                    },
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    setAllWorkoutsDatas((oldData: any) => [
+                        ...oldData,
+                        res.data,
+                    ]);
+                    setAllWorkoutsError(null);
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                    setAllWorkoutsError(err.message);
+                    setAllWorkoutsDatas(null);
+                })
+                .finally(() => {
+                    setAllWorkoutsLoading(false);
+                });
+        });
+        console.log(data);
+    };
     return (
         <div>
             {loading && (
@@ -123,7 +155,19 @@ function MainPage() {
 
                     <div className="stats-container">
                         <div className="overallSatatsComponentContainer">
-                            {workout && <OverallStats workouts={workout} />}
+                            {allWorkoutsLoading && (
+                                <div className="loadingContainer">
+                                    <CircularProgress />
+                                </div>
+                            )}
+                            {allWorkoutsError && (
+                                <div>{`There was a problem while fetching user data - ${error}`}</div>
+                            )}
+
+                            {allWorkoutsDatas.length >=
+                                data.user.workout.length && (
+                                <OverallStats workouts={allWorkoutsDatas} />
+                            )}
                         </div>
 
                         <div className="overallGraphSatatComponentContainer">
