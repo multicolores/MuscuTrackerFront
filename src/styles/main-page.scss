@@ -13,12 +13,12 @@
         font-size: 1.5em;
         font-weight: bold;
         position: absolute;
-        top: 2vh;
-        left: 10px;
+        top: 8vh;
+        left: 8vw;
     }
     .btCreateTraining {
         position: absolute;
-        top: 20vh;
+        top: 2vh;
         right: 15vw;
         @media (max-width: 400px) {
             right: 5vw;
@@ -55,6 +55,7 @@
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
         gap: 3vw;
+
         & > div {
             border-radius: 25px;
             padding: 4vh 2vw;

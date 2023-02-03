@@ -17,9 +17,7 @@ export default function AddTrainingDialog(props: any) {
         type: "",
     });
 
-    console.log(props);
     const exerciseTab = props.exercise;
-    console.log(exerciseTab);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -32,23 +30,17 @@ export default function AddTrainingDialog(props: any) {
     let weight = props.exercise.weight;
     let recup = props.exercise.recuperation;
     const changeWeight = (e: any) => {
-        console.log(weight);
         weight = e.target.value;
-        console.log(weight);
     };
     const changeRecup = (e: any) => {
-        console.log(recup);
         recup = e.target.value;
-        console.log(recup);
     };
 
     let TrainingrepsArray: any[] = [];
 
     const handleChange = (e: any) => {
-        console.log("handleChange");
         let arrayPosition = parseInt(e.target.id.split("_").pop());
         TrainingrepsArray[arrayPosition] = e.target.value;
-        console.log(TrainingrepsArray);
     };
 
     let items: JSX.Element[] = [];
@@ -67,7 +59,6 @@ export default function AddTrainingDialog(props: any) {
     }
 
     async function handleSubmit(e: any) {
-        console.log("SUBMIT");
         let FinalArray = [];
         e.preventDefault();
         for (let i = 0; i < e.target.length - 2; i++) {
@@ -79,9 +70,7 @@ export default function AddTrainingDialog(props: any) {
                 FinalArray.push(parseInt(e.target[i].value));
             }
         }
-        console.log(FinalArray);
-        console.log(props.workout);
-        console.log(props.exercise);
+
         await updateWorkout(FinalArray, props.workout, props.exercise);
         setNotify({
             isOpen: true,

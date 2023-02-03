@@ -45,7 +45,6 @@ function Workout(props: any) {
     }, []);
 
     function fetchTrainingsData() {
-        console.log(" --------- FETCH --------");
         axios
             .get(process.env.REACT_APP_API_URL + "/workout/" + workout_id, {
                 headers: {
@@ -113,8 +112,6 @@ function Workout(props: any) {
     }
 
     function buttonDeleteWorkout() {
-        console.log("ok");
-
         setConfirmDialog({
             ...confirmDialog,
             isOpen: false,
@@ -197,29 +194,6 @@ function Workout(props: any) {
                             <span className="date">12/03/2022</span>
                         </div>
                     </div>
-                    {/* {showWorkout && (
-                        <div className="workoutsDetailsContainer">
-                            <h1>{data.name}</h1>
-                            <div
-                                className="closeButton"
-                                onClick={() => {
-                                    setShowWorkout(!showWorkout);
-                                }}
-                            >
-                                <IconButton
-                                    aria-label="close icon"
-                                    component="span"
-                                    size="large"
-                                >
-                                    <CancelIcon fontSize="inherit" />
-                                </IconButton>
-                            </div>
-                            <div className="tableContainer">
-                                {ShowExercises()}
-                            </div>
-                        </div>
-                    )} */}
-
                     <div
                         className={
                             "workoutsDetailsContainer " +

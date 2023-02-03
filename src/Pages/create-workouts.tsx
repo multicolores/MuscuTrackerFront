@@ -11,7 +11,7 @@ import create_workout_image from "../images/create_workout_image.png";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
 function CreateWorkout() {
     const [exerciseNumber, setexerciseNumber] = useState(1);
@@ -23,14 +23,11 @@ function CreateWorkout() {
         type: "",
     });
 
-    console.log(location.state);
     const user = location.state["user"];
     //info : There's no difference, location.state["user"] just doesn't get type checked. So, it's more of a workaround  (location.state.user doesn't work)
-    console.log(user);
 
     async function CreateTheWorkout(e: any) {
         // dans le future : go importer cette fonction des services ( pitet plustot la fonction qui fait appelle a l'api avec les bon truc en props dedans)
-        console.log(e);
         let formArray = [];
         let exercisesArrayToSend = [];
         // for (let i = 0; i < e.target.length - 1; i++) {
@@ -41,14 +38,12 @@ function CreateWorkout() {
             formArray.push(e.target[i].value);
             // console.log(e.target[i].name);
         }
-        console.log(formArray);
         // console.log(formArray.length / 4);
         let separation = 3;
         for (let i = 0; i < formArray.length / 3; i++) {
             let objectArray = formArray
                 .slice()
                 .splice(separation - 3, separation);
-            console.log(objectArray);
             let exerciseObject = {
                 name: objectArray[0],
                 repetition: "",
@@ -58,14 +53,12 @@ function CreateWorkout() {
             exercisesArrayToSend.push(exerciseObject);
             separation = separation + 3;
         }
-        console.log(exercisesArrayToSend);
 
         let workoutObject = {
             name: e.target[0].value,
             exercise: exercisesArrayToSend,
             description: "Description de la scéance",
         };
-        console.log(workoutObject);
 
         if (createWorkout(user, workoutObject, cookies.user)) {
             setNotify({
@@ -106,7 +99,10 @@ function CreateWorkout() {
     return (
         <div className="creatWorkout_container">
             <Link to="/main" className="btGoBackMainPage">
-                <Button variant="contained" className="multiRoundedButton_white">
+                <Button
+                    variant="contained"
+                    className="multiRoundedButton_white"
+                >
                     <ArrowBackIosNewIcon className="icon-in-button" />
                 </Button>
             </Link>
@@ -119,8 +115,11 @@ function CreateWorkout() {
                     </div>
 
                     {exercisesInputs()}
-                    <Button variant="contained" className="multiRoundedButton_white submitButton">
-                    <FitnessCenterIcon className="icon-in-button" />
+                    <Button
+                        variant="contained"
+                        className="multiRoundedButton_white submitButton"
+                    >
+                        <FitnessCenterIcon className="icon-in-button" />
                         <input
                             type="submit"
                             value="Create workout"

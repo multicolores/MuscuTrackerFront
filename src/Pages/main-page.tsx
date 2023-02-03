@@ -36,11 +36,9 @@ function MainPage() {
                 },
             })
             .then((res) => {
-                console.log(res.data);
                 setData(res.data);
                 setUserinfo(res.data.user);
                 setWorkout(res.data.user.workout);
-                console.log(res.data.user.workout);
                 setError(null);
             })
             .catch((err) => {
@@ -67,11 +65,9 @@ function MainPage() {
                 },
             })
             .then((res) => {
-                console.log(res.data);
                 setData(res.data);
                 setUserinfo(res.data.user);
                 setWorkout(res.data.user.workout);
-                console.log(res.data.user.workout);
                 // if (res.data.user.workout.length > 0) {
                 //   getWorkouts(res.data.user.workout);
                 // }
@@ -79,7 +75,6 @@ function MainPage() {
                 setError(null);
             })
             .catch((err) => {
-                console.log(err.message);
                 setError(err.message);
                 setData(null);
             })
@@ -102,7 +97,7 @@ function MainPage() {
                 </div>
             )}
             {error && (
-                <div>{`There is a problem fetching user data - ${error}`}</div>
+                <div>{`There was a problem while fetching user data - ${error}`}</div>
             )}
             {data && (
                 <header className="header-main-page-container">
