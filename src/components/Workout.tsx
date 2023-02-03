@@ -65,7 +65,6 @@ function Workout(props: any) {
     function ShowExercises() {
         let items = [];
         for (let i = 0; i < data.exercise.length; i++) {
-            console.log(data.exercise[i].name);
             items.push(
                 <div className="exerciseTable">
                     <div className="content_container">
@@ -140,11 +139,11 @@ function Workout(props: any) {
                 </div>
             )}
             {error && (
-                <div>{`There is a problem fetching user data - ${error}`}</div>
+                <div>{`There was a problem while fetching user data - ${error}`}</div>
             )}
             {data && (
                 <>
-                    <div className="workoutsCard_container">
+                    <div className="workoutCard_container">
                         {/* <DeleteIcon className="deleteIcon" /> */}
                         <IconButton
                             aria-label="delete"

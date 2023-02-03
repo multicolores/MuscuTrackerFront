@@ -77,10 +77,10 @@ function MainPage() {
             )}
             {data && (
                 <header className="header-main-page-container">
-                    <h1>{data.user.name}</h1>
+                    <span className="userName">{data.user.name}</span>
                     <Button
                         variant="contained"
-                        className="btAddTraining gradientButton"
+                        className="btCreateTraining gradientButton"
                         onClick={() => {
                             toCreateWorkout();
                         }}
@@ -96,17 +96,42 @@ function MainPage() {
                         Logout
                     </Button>
 
-                    <div className="workoutsComponentsContainer">
-                        {workout &&
-                            workout.map((id: any) => (
-                                <Workout
-                                    workout_id={id}
-                                    key={id}
-                                    user={data.user}
-                                    notify={notify}
-                                    setNotify={setNotify}
-                                />
-                            ))}
+                    <div className="stats-container">
+                        <div className="overallSatatsComponentContainer">
+                            <div>
+                                <h3>test</h3>
+                            </div>
+                            <div>
+                                <h3>test</h3>
+                            </div>
+                        </div>
+
+                        <div className="overallGraphSatatComponentContainer">
+                            <h3>nombre d’entrainement depuis de début</h3>
+                            <div></div>
+                        </div>
+
+                        <div className="workoutsComponentsContainer">
+                            {workout &&
+                                workout.map((id: any) => (
+                                    <Workout
+                                        workout_id={id}
+                                        key={id}
+                                        user={data.user}
+                                        notify={notify}
+                                        setNotify={setNotify}
+                                    />
+                                ))}
+                        </div>
+
+                        <div className="otherStatsComponentContainer">
+                            <div>
+                                <span>1</span>
+                            </div>
+                            <div>
+                                <span>2</span>
+                            </div>
+                        </div>
                     </div>
                 </header>
             )}

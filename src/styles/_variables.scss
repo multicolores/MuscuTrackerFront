@@ -13,6 +13,8 @@ $gradient: linear-gradient(
     rgba(129, 177, 250, 1) 0%,
     rgba(237, 174, 249, 1) 100%
 );
+$light-pink: #e5ddf2;
+$light-blue: #e6f2f7;
 
 $ease_out: cubic-bezier(0.165, 0.84, 0.44, 1);
 @mixin transition() {

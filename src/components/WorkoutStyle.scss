@@ -15,9 +15,12 @@
     padding: 0 5vw;
     position: absolute;
     z-index: 6;
-    top: 5vh;
+    top: 4vh;
     left: 5vw;
+    height: 92vh;
     width: 90vw;
+    overflow-x: scroll;
+    z-index: 10;
     box-shadow: 0px 0px 40px 4px rgba(0, 0, 0, 0.25);
     @include transition;
     @media (max-width: 400px) {
@@ -26,10 +29,17 @@
         width: 100%;
     }
     .closeButton {
-        position: absolute;
-        right: 20px;
-        top: 20px;
+        position: fixed;
+        right: 8vw;
+        top: 9vh;
+        background-color: $bg_color;
+        border-radius: 100%;
+        @media (max-width: 400px) {
+            top: 6vh;
+            right: 6vw;
+        }
         span {
+            padding: 0;
             & > * {
                 font-size: 1.5em;
                 color: $font_color;
@@ -40,15 +50,17 @@
 
 .workoutContainer {
     // margin: 3vh 2vw;
-    padding: 2vw;
+    // padding: 2vw;
+    width: 100%;
     // margin: 3vh 10vw;
     // position: relative;
-    .workoutsCard_container {
+    .workoutCard_container {
         border: 3px solid $font_color;
+        background-color: $bg_color;
         border-radius: 10px;
-        width: 25vw;
+        width: 100%;
         padding: 3% 4%;
-        margin: 7vh 0;
+        margin: 3vh 0;
         margin-left: 50%;
         transform: translateX(-50%);
         box-shadow: 0 0.375em 0 rgba(0, 0, 0, 0.9);
@@ -85,10 +97,10 @@
         .date {
             text-align: end;
             font-weight: bold;
-            margin-top: 6%;
+            margin-top: 3%;
         }
         .exoInfo_container {
-            padding: 10% 0;
+            padding: 2% 0;
             .exoInfo {
                 display: flex;
                 justify-content: space-between;
@@ -109,6 +121,7 @@
         right: 0;
         top: 0;
         display: flex;
+        cursor: pointer;
         @media (max-width: 400px) {
             right: -5vw;
             top: -50px;
