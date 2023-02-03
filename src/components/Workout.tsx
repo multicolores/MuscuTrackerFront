@@ -13,6 +13,7 @@ import "./WorkoutStyle.scss";
 import ConfirmDialog from "./materialUI/ConfirmDialog";
 import AddTrainingDialog from "./materialUI/AddTrainingDialog";
 import { deleteWorkout } from "../servicesFunctions/deleteWorkout";
+import Graphique from "./Graphique";
 
 function Workout(props: any) {
     const [cookies, setCookie] = useCookies(["user"]);
@@ -81,8 +82,8 @@ function Workout(props: any) {
                         </div>
                         <div className="repsContainer">
                             {data.exercise[i].repetition.map((row: any) => (
-                                <div className="repRow">
-                                    <div className="reps" key={Math.random()}>
+                                <div className="repRow" key={Math.random()}>
+                                    <div className="reps">
                                         {exercieRep(row)}
                                     </div>
                                     <div className="weightAndRecupContainer">
@@ -93,9 +94,9 @@ function Workout(props: any) {
                             ))}
                         </div>
                     </div>
-                    {/* <div className="graphique_container">
-            <Graphique data={data.exercise[i].repetition} />
-          </div> */}
+                    <div className="graphique_container">
+                        <Graphique data={data.exercise[i].repetition} />
+                    </div>
                 </div>
             );
         }
@@ -187,7 +188,7 @@ function Workout(props: any) {
                                     >
                                         <li>{exercise.name}</li>
                                         <span>
-                                            {exercise.repetition.length}{" "}
+                                            {exercise.repetition.length - 1}{" "}
                                             training
                                         </span>
                                     </div>
@@ -196,7 +197,7 @@ function Workout(props: any) {
                             <span className="date">12/03/2022</span>
                         </div>
                     </div>
-                    {showWorkout && (
+                    {/* {showWorkout && (
                         <div className="workoutsDetailsContainer">
                             <h1>{data.name}</h1>
                             <div
@@ -217,7 +218,31 @@ function Workout(props: any) {
                                 {ShowExercises()}
                             </div>
                         </div>
-                    )}
+                    )} */}
+
+                    <div
+                        className={
+                            "workoutsDetailsContainer " +
+                            (showWorkout ? "show" : "hidden")
+                        }
+                    >
+                        <h1>{data.name}</h1>
+                        <div
+                            className="closeButton"
+                            onClick={() => {
+                                setShowWorkout(!showWorkout);
+                            }}
+                        >
+                            <IconButton
+                                aria-label="close icon"
+                                component="span"
+                                size="large"
+                            >
+                                <CancelIcon fontSize="inherit" />
+                            </IconButton>
+                        </div>
+                        <div className="tableContainer">{ShowExercises()}</div>
+                    </div>
                     <ConfirmDialog
                         confirmDialog={confirmDialog}
                         setConfirmDialog={setConfirmDialog}

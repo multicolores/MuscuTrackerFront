@@ -168,7 +168,7 @@ nav {
 }
 
 .multiRoundedButton {
-    background: $secondary_color !important;
+    background: $primary_color2 !important;
     border: 2px solid $font_color !important;
     color: $font_color !important;
     border-radius: 10px !important;
@@ -244,7 +244,7 @@ nav {
 
 .loadingContainer {
     width: 100%;
-    height: 100vh;
+    height: 92vh;
     flex-wrap: wrap;
     display: flex;
     justify-content: center;
@@ -301,5 +301,5 @@ nav {
 }
 
 .MuiCircularProgress-colorPrimary {
-    color: $primary_color2 !important;
+    color: rgb(27, 213, 219) !important;
 }
