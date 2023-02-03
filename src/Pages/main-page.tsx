@@ -12,6 +12,7 @@ import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import "../styles/main-page.scss";
+import OverallStats from "../components/OverallSatats";
 
 function MainPage() {
     const [data, setData] = useState<any>(null);
@@ -122,12 +123,7 @@ function MainPage() {
 
                     <div className="stats-container">
                         <div className="overallSatatsComponentContainer">
-                            <div>
-                                <h3>test</h3>
-                            </div>
-                            <div>
-                                <h3>test</h3>
-                            </div>
+                            {workout && <OverallStats workouts={workout} />}
                         </div>
 
                         <div className="overallGraphSatatComponentContainer">

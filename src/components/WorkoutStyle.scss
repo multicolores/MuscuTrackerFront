@@ -22,6 +22,8 @@
     overflow-x: scroll;
     z-index: 10;
     box-shadow: 0px 0px 40px 4px rgba(0, 0, 0, 0.25);
+    transform: scale(0) translateY(100vh);
+
     // @include transition;
     transition: 700ms $ease_out;
     @media (max-width: 400px) {
@@ -30,12 +32,12 @@
         width: 100%;
     }
     &.show {
-        opacity: 1;
         transform: scale(1);
+        left: 5vw;
     }
     &.hidden {
-        opacity: 0;
         pointer-events: none;
+        left: 65vw;
         transform: scale(0);
     }
     .closeButton {

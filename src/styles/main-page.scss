@@ -61,7 +61,43 @@
             padding: 4vh 2vw;
         }
         .overallSatatsComponentContainer {
-            background: $light-pink;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 20px;
+            text-align: center;
+            padding: 0;
+            div {
+                padding: 4vh 3vw;
+                height: 100%;
+                background: $light-pink;
+                width: 100%;
+                border-radius: 25px;
+                @include transition;
+                &:last-child {
+                    margin-left: 3vw;
+                }
+                &:hover {
+                    transform: scale(1.2);
+                    h3 {
+                        transform: scale(1.3);
+                    }
+                    span {
+                        transform: scale(0.9);
+                    }
+                }
+            }
+            h3 {
+                font-size: 4em;
+                @include transition;
+            }
+            span {
+                display: inline-block;
+                font-size: 1em;
+                opacity: 0.8;
+                margin-top: 5px;
+                @include transition;
+            }
         }
         .overallGraphSatatComponentContainer {
             background: $light-pink;

@@ -40,7 +40,6 @@ function Workout(props: any) {
     const workout_id = props.workout_id;
 
     useEffect(() => {
-        // fetch every workouts id present in user
         fetchTrainingsData();
     }, []);
 
