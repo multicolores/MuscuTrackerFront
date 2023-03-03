@@ -21,8 +21,11 @@
     width: 90vw;
     overflow-x: scroll;
     z-index: 10;
-    box-shadow: 0px 0px 40px 4px rgba(0, 0, 0, 0.25);
-    transform: scale(0) translateY(100vh);
+    transform: scale(1) translateY(100vh);
+
+    border-radius: 15px;
+    box-shadow: 0 0.375em 0 rgba(0, 0, 0, 0.9),
+        0px 0px 40px 4px rgba(0, 0, 0, 0.25);
 
     // @include transition;
     transition: 700ms $ease_out;
@@ -37,8 +40,8 @@
     }
     &.hidden {
         pointer-events: none;
-        left: 65vw;
-        transform: scale(0);
+        left: 110vw;
+        transform: scale(1);
     }
     .closeButton {
         position: fixed;
@@ -65,63 +68,65 @@
 }
 
 .workoutContainer {
-    // margin: 3vh 2vw;
-    // padding: 2vw;
     width: 100%;
-    // margin: 3vh 10vw;
-    // position: relative;
     .workoutCard_container {
-        border: 3px solid $font_color;
-        background-color: $bg_color;
-        border-radius: 10px;
+        background-color: $font-color;
+        color: $bg_color;
+        border-radius: 20px;
         width: 100%;
-        padding: 3% 4%;
+        padding: 25px 50px;
         margin: 3vh 0;
         margin-left: 50%;
         transform: translateX(-50%);
+        cursor: pointer;
+        transition: 300ms $ease_out;
         box-shadow: 0 0.375em 0 rgba(0, 0, 0, 0.9);
 
-        // position: relative;
-        cursor: pointer;
         @media (max-width: 400px) {
             width: 80vw;
             margin: 2vh 0;
             margin-left: 50%;
         }
+
         .deleteIcon {
             position: absolute;
-            right: 1%;
-            top: 1%;
-            color: $font_color;
+            right: 15px;
+            top: 15px;
+            color: $bg_color;
         }
         h2 {
-            padding-bottom: 4%;
+            padding-bottom: 6px;
             font-size: 2.5em;
-            text-align: center;
             text-overflow: ellipsis;
             overflow: hidden;
-            margin: 0 5%;
         }
         span {
             display: block;
         }
         .description {
-            font-style: italic;
-            text-align: center;
-            padding-bottom: 4%;
+            padding: 3px 0;
+            opacity: 0.7;
         }
         .date {
-            text-align: end;
             font-weight: bold;
-            margin-top: 3%;
         }
         .exoInfo_container {
-            padding: 2% 0;
+            padding: 30px 20px;
+            padding-bottom: 0;
             .exoInfo {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 1% 0;
+                padding: 1%;
+            }
+        }
+        &:hover {
+            background: $ollow_yellow;
+
+            color: $font-color;
+            transform: translateX(-50%) scale(1.08);
+            .deleteIcon {
+                color: $font-color;
             }
         }
     }

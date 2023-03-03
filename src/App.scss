@@ -10,6 +10,8 @@ body {
     background-color: $bg_color;
     color: $font_color;
     font-family: "Montserrat", sans-serif;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 h1 {

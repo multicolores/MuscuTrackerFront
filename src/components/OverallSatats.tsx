@@ -10,7 +10,6 @@ function OverallStats(props: { workouts: any[] }) {
     const [data, setData] = useState({ trainingsNumber: 0, repsNumber: 0 });
 
     useEffect(() => {
-        console.log(props.workouts);
         let i = 0;
         let reps = 0;
         let trainings = 0;
@@ -18,7 +17,6 @@ function OverallStats(props: { workouts: any[] }) {
             i++;
             workout.exercise.forEach((exercise: any) => {
                 exercise.repetition.forEach((repetition: any) => {
-                    console.log(repetition);
                     for (let i = 2; i < repetition.length; i++) {
                         reps += repetition[i];
                     }
@@ -30,10 +28,6 @@ function OverallStats(props: { workouts: any[] }) {
                 setData({ trainingsNumber: trainings, repsNumber: reps });
             }
         });
-        console.log(i);
-
-        console.log(trainings);
-        console.log(reps);
     }, []);
 
     return (

@@ -13,6 +13,8 @@ import { Link, useNavigate } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import "../styles/main-page.scss";
 import OverallStats from "../components/OverallSatats";
+import OverallGraphStat from "../components/OverallGraphStat";
+import PoidsGraphStat from "../components/PoidsGraphStat";
 
 function MainPage() {
     const [data, setData] = useState<any>(null);
@@ -120,7 +122,6 @@ function MainPage() {
                     setAllWorkoutsLoading(false);
                 });
         });
-        console.log(data);
     };
     return (
         <div>
@@ -154,6 +155,7 @@ function MainPage() {
                     </Button>
 
                     <div className="stats-container">
+                        {/* todo: regroupper toussa dans le même componsant ? a voir ( faire attentions au grid aussi ) */}
                         <div className="overallSatatsComponentContainer">
                             {allWorkoutsLoading && (
                                 <div className="loadingContainer">
@@ -171,8 +173,19 @@ function MainPage() {
                         </div>
 
                         <div className="overallGraphSatatComponentContainer">
-                            <h3>nombre d’entrainement depuis de début</h3>
-                            <div></div>
+                            {allWorkoutsLoading && (
+                                <div className="loadingContainer">
+                                    <CircularProgress />
+                                </div>
+                            )}
+                            {allWorkoutsError && (
+                                <div>{`There was a problem while fetching user data - ${error}`}</div>
+                            )}
+
+                            {allWorkoutsDatas.length >=
+                                data.user.workout.length && (
+                                <OverallGraphStat workouts={allWorkoutsDatas} />
+                            )}
                         </div>
 
                         <div className="workoutsComponentsContainer">
@@ -189,12 +202,41 @@ function MainPage() {
                                 ))}
                         </div>
 
-                        <div className="otherStatsComponentContainer">
+                        <div className="overAllStatsComponentContainer">
+                            {/* poids stats */}
                             <div>
-                                <span>1</span>
+                                {allWorkoutsLoading && (
+                                    <div className="loadingContainer">
+                                        <CircularProgress />
+                                    </div>
+                                )}
+                                {allWorkoutsError && (
+                                    <div>{`There was a problem while fetching user data - ${error}`}</div>
+                                )}
+                                {allWorkoutsDatas.length >=
+                                    data.user.workout.length && (
+                                    <PoidsGraphStat
+                                        workouts={allWorkoutsDatas}
+                                    />
+                                )}
                             </div>
+
+                            {/* poids stats ( to change en une autre donné biensur :)  */}
                             <div>
-                                <span>2</span>
+                                {allWorkoutsLoading && (
+                                    <div className="loadingContainer">
+                                        <CircularProgress />
+                                    </div>
+                                )}
+                                {allWorkoutsError && (
+                                    <div>{`There was a problem while fetching user data - ${error}`}</div>
+                                )}
+                                {allWorkoutsDatas.length >=
+                                    data.user.workout.length && (
+                                    <PoidsGraphStat
+                                        workouts={allWorkoutsDatas}
+                                    />
+                                )}
                             </div>
                         </div>
                     </div>

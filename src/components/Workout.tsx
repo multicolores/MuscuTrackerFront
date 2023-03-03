@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import CancelIcon from "@mui/icons-material/Cancel";
+import CloseIcon from "@mui/icons-material/Close";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import "./WorkoutStyle.scss";
@@ -173,6 +173,7 @@ function Workout(props: any) {
                             }}
                         >
                             <h2>{data.name}</h2>
+                            <span className="date">12/03/2022</span>
                             <span className="description">
                                 {data.description}
                             </span>
@@ -182,7 +183,7 @@ function Workout(props: any) {
                                         className="exoInfo"
                                         key={Math.random()}
                                     >
-                                        <li>{exercise.name}</li>
+                                        <span>{exercise.name}</span>
                                         <span>
                                             {exercise.repetition.length - 1}{" "}
                                             training
@@ -190,7 +191,6 @@ function Workout(props: any) {
                                     </div>
                                 ))}
                             </div>
-                            <span className="date">12/03/2022</span>
                         </div>
                     </div>
                     <div
@@ -211,7 +211,7 @@ function Workout(props: any) {
                                 component="span"
                                 size="large"
                             >
-                                <CancelIcon fontSize="inherit" />
+                                <CloseIcon fontSize="inherit" />
                             </IconButton>
                         </div>
                         <div className="tableContainer">{ShowExercises()}</div>

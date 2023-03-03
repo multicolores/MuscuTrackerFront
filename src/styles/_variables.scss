@@ -16,6 +16,14 @@ $gradient: linear-gradient(
 $light-pink: #e5ddf2;
 $light-blue: #e6f2f7;
 
+// $ollow_blue: #6fffe9;
+// $ollow_yellow: #ffee32;
+// $ollow_red: #ffee32;
+
+$ollow_blue: #90fcf9;
+$ollow_yellow: #ffd60a;
+$ollow_red: #ffee32;
+
 $ease_out: cubic-bezier(0.165, 0.84, 0.44, 1);
 @mixin transition() {
     transition: 700ms $ease_out !important;
