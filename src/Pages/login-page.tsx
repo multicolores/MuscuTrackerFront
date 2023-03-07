@@ -30,7 +30,7 @@ function Login() {
 
     function RegisterPostRequest() {
         axios
-            .post(process.env.REACT_APP_API_URL+`/login`, {
+            .post(process.env.REACT_APP_API_URL + `/login`, {
                 email: email,
                 password: password,
             })
@@ -41,15 +41,12 @@ function Login() {
             .catch((error) => {
                 console.error(error);
                 if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
                     setNotify({
                         isOpen: true,
                         message: "Error" + " : " + error.response.data,
                         type: "error",
                     });
                 } else if (error.request) {
-                    console.log(error.request);
                     setNotify({
                         isOpen: true,
                         message:

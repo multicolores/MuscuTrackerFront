@@ -12,6 +12,11 @@ import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import "../styles/main-page.scss";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import OverallStats from "../components/OverallSatats";
+import OverallGraphStat from "../components/OverallGraphStat";
+import PoidsGraphStat from "../components/PoidsGraphStat";
+import RecupGraphStat from "../components/RecupGraphStat";
 
 function MainPage() {
     const [data, setData] = useState<any>(null);
@@ -19,6 +24,10 @@ function MainPage() {
     const [workout, setWorkout] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const [allWorkoutsDatas, setAllWorkoutsDatas] = useState<any>([]);
+    const [allWorkoutsLoading, setAllWorkoutsLoading] = useState(true);
+    const [allWorkoutsError, setAllWorkoutsError] = useState(null);
 
     const [cookies, setCookie, removeCookie] = useCookies(["user"]);
     const [notify, setNotify] = useState({
@@ -36,11 +45,10 @@ function MainPage() {
                 },
             })
             .then((res) => {
-                console.log(res.data);
                 setData(res.data);
                 setUserinfo(res.data.user);
                 setWorkout(res.data.user.workout);
-                console.log(res.data.user.workout);
+                fetchAllWorkoutsData(res.data.user.workout);
                 setError(null);
             })
             .catch((err) => {
@@ -59,12 +67,66 @@ function MainPage() {
         navigate("/create-workouts", { state: data });
     };
 
+    function reloadDatas() {
+        axios
+            .get(process.env.REACT_APP_API_URL + "/user", {
+                headers: {
+                    "auth-token": cookies.user,
+                },
+            })
+            .then((res) => {
+                setData(res.data);
+                setUserinfo(res.data.user);
+                setWorkout(res.data.user.workout);
+
+                setError(null);
+            })
+            .catch((err) => {
+                setError(err.message);
+                setData(null);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+
+        fetchAllWorkoutsData(data.user.workout);
+    }
+
     function Logout() {
         if (cookies.user) {
             removeCookie("user");
         }
         navigate("/login");
     }
+
+    const fetchAllWorkoutsData = (workoutsIds: string[]) => {
+        setAllWorkoutsDatas([]);
+        workoutsIds.map((workoutId) => {
+            // console.log(workoutId);
+            axios
+                .get(process.env.REACT_APP_API_URL + "/workout/" + workoutId, {
+                    headers: {
+                        "auth-token": cookies.user,
+                    },
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    setAllWorkoutsDatas((oldData: any) => [
+                        ...oldData,
+                        res.data,
+                    ]);
+                    setAllWorkoutsError(null);
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                    setAllWorkoutsError(err.message);
+                    setAllWorkoutsDatas(null);
+                })
+                .finally(() => {
+                    setAllWorkoutsLoading(false);
+                });
+        });
+    };
     return (
         <div>
             {loading && (
@@ -73,14 +135,14 @@ function MainPage() {
                 </div>
             )}
             {error && (
-                <div>{`There is a problem fetching user data - ${error}`}</div>
+                <div>{`There was a problem while fetching user data - ${error}`}</div>
             )}
             {data && (
                 <header className="header-main-page-container">
-                    <h1>{data.user.name}</h1>
+                    <span className="userName">{data.user.name}</span>
                     <Button
                         variant="contained"
-                        className="btAddTraining gradientButton"
+                        className="btCreateTraining gradientButton"
                         onClick={() => {
                             toCreateWorkout();
                         }}
@@ -96,17 +158,92 @@ function MainPage() {
                         Logout
                     </Button>
 
-                    <div className="workoutsComponentsContainer">
-                        {workout &&
-                            workout.map((id: any) => (
-                                <Workout
-                                    workout_id={id}
-                                    key={id}
-                                    user={data.user}
-                                    notify={notify}
-                                    setNotify={setNotify}
-                                />
-                            ))}
+                    <div className="stats-container">
+                        {/* todo: regroupper toussa dans le même componsant ? a voir ( faire attentions au grid aussi ) */}
+                        <div className="overallSatatsComponentContainer">
+                            {allWorkoutsLoading && (
+                                <div className="loadingContainer">
+                                    <CircularProgress />
+                                </div>
+                            )}
+                            {allWorkoutsError && (
+                                <div>{`There was a problem while fetching user data - ${error}`}</div>
+                            )}
+
+                            {allWorkoutsDatas.length >=
+                                data.user.workout.length && (
+                                <OverallStats workouts={allWorkoutsDatas} />
+                            )}
+                        </div>
+
+                        <div className="overallGraphSatatComponentContainer">
+                            {allWorkoutsLoading && (
+                                <div className="loadingContainer">
+                                    <CircularProgress />
+                                </div>
+                            )}
+                            {allWorkoutsError && (
+                                <div>{`There was a problem while fetching user data - ${error}`}</div>
+                            )}
+
+                            {allWorkoutsDatas.length >=
+                                data.user.workout.length && (
+                                <OverallGraphStat workouts={allWorkoutsDatas} />
+                            )}
+                        </div>
+
+                        <div className="workoutsComponentsContainer">
+                            {/* <KeyboardDoubleArrowDownIcon className="scroll-down-icon" /> */}
+                            {workout &&
+                                workout.map((id: any) => (
+                                    <Workout
+                                        workout_id={id}
+                                        key={id}
+                                        user={data.user}
+                                        notify={notify}
+                                        reloadDatas={reloadDatas}
+                                        setNotify={setNotify}
+                                    />
+                                ))}
+                        </div>
+
+                        <div className="overAllStatsComponentContainer">
+                            {/* poids stats */}
+                            <div>
+                                {allWorkoutsLoading && (
+                                    <div className="loadingContainer">
+                                        <CircularProgress />
+                                    </div>
+                                )}
+                                {allWorkoutsError && (
+                                    <div>{`There was a problem while fetching user data - ${error}`}</div>
+                                )}
+                                {allWorkoutsDatas.length >=
+                                    data.user.workout.length && (
+                                    <PoidsGraphStat
+                                        workouts={allWorkoutsDatas}
+                                    />
+                                )}
+                            </div>
+
+                            {/* poids stats ( to change en une autre donné biensur :)  */}
+                            <div>
+                                {allWorkoutsLoading && (
+                                    <div className="loadingContainer">
+                                        <CircularProgress />
+                                    </div>
+                                )}
+                                {allWorkoutsError && (
+                                    <div>{`There was a problem while fetching user data - ${error}`}</div>
+                                )}
+                                {allWorkoutsDatas.length >=
+                                    data.user.workout.length && (
+                                    <RecupGraphStat
+                                        workouts={allWorkoutsDatas}
+                                    />
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </header>
             )}

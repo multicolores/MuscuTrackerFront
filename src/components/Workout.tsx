@@ -6,12 +6,14 @@ import { useCookies } from "react-cookie";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import CancelIcon from "@mui/icons-material/Cancel";
+import CloseIcon from "@mui/icons-material/Close";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import "./WorkoutStyle.scss";
 import ConfirmDialog from "./materialUI/ConfirmDialog";
 import AddTrainingDialog from "./materialUI/AddTrainingDialog";
+import { deleteWorkout } from "../servicesFunctions/deleteWorkout";
+import Graphique from "./Graphique";
 
 function Workout(props: any) {
     const [cookies, setCookie] = useCookies(["user"]);
@@ -25,7 +27,9 @@ function Workout(props: any) {
         isOpen: false,
         title: "",
         subTitle: "",
-        onConfirm: null,
+        onConfirm: () => {
+            buttonDeleteWorkout();
+        },
     });
     const [addTrainingDialog, setAddTrainingDialog] = useState({
         isOpen: false,
@@ -36,12 +40,10 @@ function Workout(props: any) {
     const workout_id = props.workout_id;
 
     useEffect(() => {
-        // fetch every workouts id present in user
         fetchTrainingsData();
     }, []);
 
     function fetchTrainingsData() {
-        console.log(" --------- FETCH --------");
         axios
             .get(process.env.REACT_APP_API_URL + "/workout/" + workout_id, {
                 headers: {
@@ -65,7 +67,6 @@ function Workout(props: any) {
     function ShowExercises() {
         let items = [];
         for (let i = 0; i < data.exercise.length; i++) {
-            console.log(data.exercise[i].name);
             items.push(
                 <div className="exerciseTable">
                     <div className="content_container">
@@ -73,14 +74,15 @@ function Workout(props: any) {
                             exercise={data.exercise[i]}
                             workout={data}
                             reloadTrainings={fetchTrainingsData}
+                            reloadDatas={props.reloadDatas}
                         />
                         <div className="exoInfo">
                             <span>{data.exercise[i].name}</span>
                         </div>
                         <div className="repsContainer">
                             {data.exercise[i].repetition.map((row: any) => (
-                                <div className="repRow">
-                                    <div className="reps" key={Math.random()}>
+                                <div className="repRow" key={Math.random()}>
+                                    <div className="reps">
                                         {exercieRep(row)}
                                     </div>
                                     <div className="weightAndRecupContainer">
@@ -91,9 +93,9 @@ function Workout(props: any) {
                             ))}
                         </div>
                     </div>
-                    {/* <div className="graphique_container">
-            <Graphique data={data.exercise[i].repetition} />
-          </div> */}
+                    <div className="graphique_container">
+                        <Graphique data={data.exercise[i].repetition} />
+                    </div>
                 </div>
             );
         }
@@ -109,28 +111,31 @@ function Workout(props: any) {
         return repRow;
     }
 
-    // function buttonDeleteWorkout() {
-    //   setConfirmDialog({
-    //     ...confirmDialog,
-    //     isOpen: false,
-    //   });
+    function buttonDeleteWorkout() {
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false,
+        });
 
-    //   let res = deleteWorkout(props.user, data._id, cookies.user);
-    //   if (res) {
-    //     props.setNotify({
-    //       isOpen: true,
-    //       message: "Workout Supprimer",
-    //       type: "success",
-    //     });
-    //     props.reloadDatas();
-    //   } else {
-    //     props.setNotify({
-    //       isOpen: true,
-    //       message: "something went wrong, please try again",
-    //       type: "error",
-    //     });
-    //   }
-    // }
+        const deleteCall = async () => {
+            let res = await deleteWorkout(props.user, data._id, cookies.user);
+            if (res) {
+                props.setNotify({
+                    isOpen: true,
+                    message: "Workout Supprimer",
+                    type: "success",
+                });
+                props.reloadDatas();
+            } else {
+                props.setNotify({
+                    isOpen: true,
+                    message: "something went wrong, please try again",
+                    type: "error",
+                });
+            }
+        };
+        deleteCall();
+    }
 
     return (
         <div className="workoutContainer">
@@ -140,25 +145,25 @@ function Workout(props: any) {
                 </div>
             )}
             {error && (
-                <div>{`There is a problem fetching user data - ${error}`}</div>
+                <div>{`There was a problem while fetching user data - ${error}`}</div>
             )}
             {data && (
                 <>
-                    <div className="workoutsCard_container">
+                    <div className="workoutCard_container">
                         {/* <DeleteIcon className="deleteIcon" /> */}
                         <IconButton
                             aria-label="delete"
                             className="deleteIcon"
-                            // onClick={() => {
-                            //   setConfirmDialog({
-                            //     isOpen: true,
-                            //     title: "Do you really want to delete this workout ?",
-                            //     subTitle: "",
-                            //     onConfirm: () => {
-                            //       buttonDeleteWorkout();
-                            //     },
-                            //   });
-                            // }}
+                            onClick={() => {
+                                setConfirmDialog({
+                                    isOpen: true,
+                                    title: "Do you really want to delete this workout ?",
+                                    subTitle: "",
+                                    onConfirm: () => {
+                                        buttonDeleteWorkout();
+                                    },
+                                });
+                            }}
                         >
                             <DeleteIcon />
                         </IconButton>
@@ -169,45 +174,49 @@ function Workout(props: any) {
                             }}
                         >
                             <h2>{data.name}</h2>
+                            <span className="date">12/03/2022</span>
                             <span className="description">
                                 {data.description}
                             </span>
                             <div className="exoInfo_container">
                                 {data.exercise.map((exercise: any) => (
-                                    <div className="exoInfo">
-                                        <li>{exercise.name}</li>
+                                    <div
+                                        className="exoInfo"
+                                        key={Math.random()}
+                                    >
+                                        <span>{exercise.name}</span>
                                         <span>
-                                            {exercise.repetition.length}{" "}
+                                            {exercise.repetition.length - 1}{" "}
                                             training
                                         </span>
                                     </div>
                                 ))}
                             </div>
-                            <span className="date">12/03/2022</span>
                         </div>
                     </div>
-                    {showWorkout && (
-                        <div className="workoutsDetailsContainer">
-                            <h1>{data.name}</h1>
-                            <div
-                                className="closeButton"
-                                onClick={() => {
-                                    setShowWorkout(!showWorkout);
-                                }}
+                    <div
+                        className={
+                            "workoutsDetailsContainer " +
+                            (showWorkout ? "show" : "hidden")
+                        }
+                    >
+                        <h1>{data.name}</h1>
+                        <div
+                            className="closeButton"
+                            onClick={() => {
+                                setShowWorkout(!showWorkout);
+                            }}
+                        >
+                            <IconButton
+                                aria-label="close icon"
+                                component="span"
+                                size="large"
                             >
-                                <IconButton
-                                    aria-label="close icon"
-                                    component="span"
-                                    size="large"
-                                >
-                                    <CancelIcon fontSize="inherit" />
-                                </IconButton>
-                            </div>
-                            <div className="tableContainer">
-                                {ShowExercises()}
-                            </div>
+                                <CloseIcon fontSize="inherit" />
+                            </IconButton>
                         </div>
-                    )}
+                        <div className="tableContainer">{ShowExercises()}</div>
+                    </div>
                     <ConfirmDialog
                         confirmDialog={confirmDialog}
                         setConfirmDialog={setConfirmDialog}

@@ -1,16 +1,16 @@
 @import "../../styles/variables";
 
-.addTraining_DialogContainer{
+.addTraining_DialogContainer {
     background: $font_color;
     color: $bg_color;
     padding: 2vh 3vw;
-    @media (max-width : 400px) {
+    @media (max-width: 400px) {
         padding: 2vh 0vw;
     }
-    h3{
+    h3 {
         padding-top: 2vh;
         font-size: 1.5em;
-        @media (max-width : 400px) {
+        @media (max-width: 400px) {
             padding: 2vh 5vw;
         }
     }
@@ -25,40 +25,65 @@
         font-size: 1.3em;
         @media (max-width: 400px) {
             font-size: 1em;
-        } 
+        }
         &:focus {
-          outline: none !important;
-          border-bottom: 2px solid rgb(27, 213, 219);
+            outline: none !important;
+            border-bottom: 2px solid rgb(27, 213, 219);
         }
     }
-    .weightRecup_input{
+    .weightRecup_input {
         padding: 3vh 0;
         display: flex;
         justify-content: space-between;
-        input{
-            width: 15%;
+        div {
+            width: 30%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            input {
+                width: 100px;
+                padding-bottom: 5px;
+                border-bottom: none;
+            }
+            span {
+                @include transition;
+            }
+            &:hover {
+                span {
+                    margin: 0 5px;
+                    &:hover {
+                        svg {
+                            color: $ollow_blue;
+                            transform: translateY(-2px);
+                        }
+                    }
+                }
+            }
         }
-
+        svg {
+            color: $bg_color;
+            @include transition;
+        }
     }
-    .reps_input{
+    .reps_input {
         padding: 2vh 0;
         display: flex;
         justify-content: center;
         // justify-content: space-between;
-        .reps_container{
+        .reps_container {
             display: flex;
             justify-content: space-around;
             gap: 20px;
             width: 70%;
-            input{
+            input {
                 width: 10%;
             }
         }
-        .btReps{
+        .btReps {
             width: 20%;
             display: flex;
             justify-content: space-between;
-            button{
+            button {
                 width: 45%;
                 background: rgba(0, 0, 0, 0);
                 border: none;
@@ -67,33 +92,28 @@
             }
         }
     }
-    .buttons_Container{
+    .buttons_Container {
         // width: 45%;
         display: flex;
         gap: 20px;
         justify-content: space-between;
-        .simpleBorderButton{
+        .simpleBorderButton {
             display: inline-block;
-            border: 1px solid rgba(255, 255, 255, 0.200) !important;
-            &:hover{
-                border: 1px solid rgba(255, 255, 255, 0.600) !important;
-
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            &:hover {
+                border: 1px solid rgba(255, 255, 255, 0.6) !important;
             }
         }
-        .underlineButton{
+        .underlineButton {
             border-bottom: 2px solid $bg_color !important;
             color: $bg_color !important;
         }
-        .submitInput{
+        .submitInput {
             cursor: pointer;
             font-size: 1.1em;
             &:hover {
-            border-bottom: 2px solid rgb(27, 213, 219);
-
+                border-bottom: 2px solid rgb(27, 213, 219);
             }
         }
     }
-
-
-}  
-
+}

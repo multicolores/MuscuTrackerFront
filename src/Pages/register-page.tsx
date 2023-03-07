@@ -29,29 +29,24 @@ function Register() {
             email: email,
             password: password,
         };
-        console.log(jsonRegisterInfo);
         if (captchaRef.current && captchaRef.current.getValue()) {
             axios
-                .post(process.env.REACT_APP_API_URL+`/register`, {
+                .post(process.env.REACT_APP_API_URL + `/register`, {
                     name: name,
                     email: email,
                     password: password,
                 })
                 .then((res) => {
-                    console.log(res.data);
                     navigate("/login");
                 })
                 .catch((error) => {
                     if (error.response) {
-                        console.log(error.response.data);
-                        console.log(error.response.status);
                         setNotify({
                             isOpen: true,
                             message: "Error" + " : " + error.response.data,
                             type: "error",
                         });
                     } else if (error.request) {
-                        console.log(error.request);
                         setNotify({
                             isOpen: true,
                             message:

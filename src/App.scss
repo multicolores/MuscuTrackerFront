@@ -10,6 +10,8 @@ body {
     background-color: $bg_color;
     color: $font_color;
     font-family: "Montserrat", sans-serif;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -244,7 +246,7 @@ nav {
 
 .loadingContainer {
     width: 100%;
-    height: 100vh;
+    height: 92vh;
     flex-wrap: wrap;
     display: flex;
     justify-content: center;
@@ -301,5 +303,11 @@ nav {
 }
 
 .MuiCircularProgress-colorPrimary {
-    color: $primary_color2 !important;
+    color: rgb(27, 213, 219) !important;
+}
+
+.custom-tooltip-graph {
+    background-color: $bg_color;
+    padding: 15px 20px;
+    border: 1px solid grey;
 }
