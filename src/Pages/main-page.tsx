@@ -88,6 +88,8 @@ function MainPage() {
             .finally(() => {
                 setLoading(false);
             });
+
+        fetchAllWorkoutsData(data.user.workout);
     }
 
     function Logout() {

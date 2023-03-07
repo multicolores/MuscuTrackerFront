@@ -36,7 +36,8 @@ const RecupGraphStat = (props: { workouts: any[] }) => {
                 }
             });
         });
-        const moyenneRecup = recupNumber / serieNumber;
+        let moyenneRecup = recupNumber / serieNumber;
+        moyenneRecup = Math.round(moyenneRecup * 100) / 100;
 
         let dataObjectToAdd = { name: workout.name, poids: moyenneRecup };
         data.push(dataObjectToAdd);

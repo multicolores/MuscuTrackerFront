@@ -78,6 +78,7 @@ export default function AddTrainingDialog(props: any) {
             type: "success",
         });
         props.reloadTrainings();
+        props.reloadDatas();
         setOpen(false);
     }
 

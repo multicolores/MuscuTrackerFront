@@ -74,6 +74,7 @@ function Workout(props: any) {
                             exercise={data.exercise[i]}
                             workout={data}
                             reloadTrainings={fetchTrainingsData}
+                            reloadDatas={props.reloadDatas}
                         />
                         <div className="exoInfo">
                             <span>{data.exercise[i].name}</span>
