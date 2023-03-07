@@ -305,3 +305,9 @@ nav {
 .MuiCircularProgress-colorPrimary {
     color: rgb(27, 213, 219) !important;
 }
+
+.custom-tooltip-graph {
+    background-color: $bg_color;
+    padding: 15px 20px;
+    border: 1px solid grey;
+}

@@ -12,9 +12,11 @@ import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import "../styles/main-page.scss";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import OverallStats from "../components/OverallSatats";
 import OverallGraphStat from "../components/OverallGraphStat";
 import PoidsGraphStat from "../components/PoidsGraphStat";
+import RecupGraphStat from "../components/RecupGraphStat";
 
 function MainPage() {
     const [data, setData] = useState<any>(null);
@@ -189,6 +191,7 @@ function MainPage() {
                         </div>
 
                         <div className="workoutsComponentsContainer">
+                            {/* <KeyboardDoubleArrowDownIcon className="scroll-down-icon" /> */}
                             {workout &&
                                 workout.map((id: any) => (
                                     <Workout
@@ -233,7 +236,7 @@ function MainPage() {
                                 )}
                                 {allWorkoutsDatas.length >=
                                     data.user.workout.length && (
-                                    <PoidsGraphStat
+                                    <RecupGraphStat
                                         workouts={allWorkoutsDatas}
                                     />
                                 )}
