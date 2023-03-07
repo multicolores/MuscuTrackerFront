@@ -8,6 +8,13 @@ import DialogContent from "@mui/material/DialogContent";
 import "./AddTrainingDialog.scss";
 import Notification from "./Notification";
 import { updateWorkout } from "../../servicesFunctions/updateWorkout";
+import {
+    add15secondes,
+    remove15secondes,
+} from "../../servicesFunctions/handleTime";
+import { IconButton } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 export default function AddTrainingDialog(props: any) {
     const [open, setOpen] = useState(false);
@@ -16,6 +23,8 @@ export default function AddTrainingDialog(props: any) {
         message: "",
         type: "",
     });
+    const [recup, setRecup] = useState(props.exercise.recuperation);
+    const [weight, setWeight] = useState(props.exercise.weight);
 
     const exerciseTab = props.exercise;
 
@@ -25,15 +34,6 @@ export default function AddTrainingDialog(props: any) {
 
     const handleClose = () => {
         setOpen(false);
-    };
-
-    let weight = props.exercise.weight;
-    let recup = props.exercise.recuperation;
-    const changeWeight = (e: any) => {
-        weight = e.target.value;
-    };
-    const changeRecup = (e: any) => {
-        recup = e.target.value;
     };
 
     let TrainingrepsArray: any[] = [];
@@ -64,8 +64,8 @@ export default function AddTrainingDialog(props: any) {
         for (let i = 0; i < e.target.length - 2; i++) {
             if (i === 0 || i === 1) {
                 if (e.target[i].value) FinalArray.push(e.target[i].value);
-                else if (i === 0) FinalArray.push(props.exercise.weight);
-                else if (i === 1) FinalArray.push(props.exercise.recuperation);
+                else if (i === 0) FinalArray.push(weight);
+                else if (i === 1) FinalArray.push(recup);
             } else {
                 FinalArray.push(parseInt(e.target[i].value));
             }
@@ -80,6 +80,7 @@ export default function AddTrainingDialog(props: any) {
         props.reloadTrainings();
         setOpen(false);
     }
+
     return (
         <>
             <Notification notify={notify} setNotify={setNotify} />
@@ -96,16 +97,73 @@ export default function AddTrainingDialog(props: any) {
                     <form onSubmit={handleSubmit}>
                         <DialogContent>
                             <div className="weightRecup_input">
-                                <input
-                                    type="text"
-                                    onChange={changeWeight}
-                                    placeholder={props.exercise.weight}
-                                />
-                                <input
-                                    type="text"
-                                    onChange={changeRecup}
-                                    placeholder={props.exercise.recuperation}
-                                />
+                                <div className="poids">
+                                    <IconButton
+                                        aria-label="close icon"
+                                        component="span"
+                                        size="large"
+                                        onClick={() => {
+                                            setWeight(
+                                                parseInt(
+                                                    weight.replace("kg", "")
+                                                ) -
+                                                    1 +
+                                                    "kg"
+                                            );
+                                        }}
+                                    >
+                                        <RemoveIcon fontSize="inherit" />
+                                    </IconButton>
+                                    <input
+                                        type="text"
+                                        readOnly={true}
+                                        value={weight}
+                                    />
+                                    <IconButton
+                                        aria-label="close icon"
+                                        component="span"
+                                        size="large"
+                                        onClick={() => {
+                                            setWeight(
+                                                parseInt(
+                                                    weight.replace("kg", "")
+                                                ) +
+                                                    1 +
+                                                    "kg"
+                                            );
+                                        }}
+                                    >
+                                        <AddIcon fontSize="inherit" />
+                                    </IconButton>
+                                </div>
+
+                                <div className="recup">
+                                    <IconButton
+                                        aria-label="close icon"
+                                        component="span"
+                                        size="large"
+                                        onClick={() => {
+                                            setRecup(remove15secondes(recup));
+                                        }}
+                                    >
+                                        <RemoveIcon fontSize="inherit" />
+                                    </IconButton>
+                                    <input
+                                        type="text"
+                                        readOnly={true}
+                                        value={recup}
+                                    />
+                                    <IconButton
+                                        aria-label="close icon"
+                                        component="span"
+                                        size="large"
+                                        onClick={() => {
+                                            setRecup(add15secondes(recup));
+                                        }}
+                                    >
+                                        <AddIcon fontSize="inherit" />
+                                    </IconButton>
+                                </div>
                             </div>
                             <div className="reps_input">
                                 <div className="reps_container">
