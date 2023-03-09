@@ -18,12 +18,13 @@
     }
     .btCreateTraining {
         position: absolute;
-        top: 2vh;
-        right: 15vw;
+        top: 4vh;
+        right: 8vw;
         @media (max-width: 400px) {
             right: 5vw;
         }
     }
+
     .btLogout {
         background: rgba(0, 0, 0, 0);
         position: absolute;

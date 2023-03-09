@@ -13,6 +13,21 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
+const arrayOfPossibleRecup = [
+    "45s",
+    "1min",
+    "1min15s",
+    "1min30s",
+    "1min45s",
+    "2min",
+    "2min15s",
+    "2min30s",
+    "2min45s",
+    "3min",
+    "3min15s",
+    "3min30s",
+];
+
 function CreateWorkout() {
     const [exerciseNumber, setexerciseNumber] = useState(1);
     const location = useLocation();
@@ -24,32 +39,28 @@ function CreateWorkout() {
     });
 
     const user = location.state["user"];
-    //info : There's no difference, location.state["user"] just doesn't get type checked. So, it's more of a workaround  (location.state.user doesn't work)
 
     async function CreateTheWorkout(e: any) {
-        // dans le future : go importer cette fonction des services ( pitet plustot la fonction qui fait appelle a l'api avec les bon truc en props dedans)
         let formArray = [];
         let exercisesArrayToSend = [];
-        // for (let i = 0; i < e.target.length - 1; i++) {
-        //   formArray.push(e.target[i].value);
-        //   console.log(e.target[i].name);
-        // }
+
         for (let i = 1; i < e.target.length - 2; i++) {
             formArray.push(e.target[i].value);
-            // console.log(e.target[i].name);
         }
-        // console.log(formArray.length / 4);
+
         let separation = 3;
         for (let i = 0; i < formArray.length / 3; i++) {
             let objectArray = formArray
                 .slice()
                 .splice(separation - 3, separation);
+
             let exerciseObject = {
                 name: objectArray[0],
                 repetition: "",
                 recuperation: objectArray[1],
                 weight: objectArray[2],
             };
+
             exercisesArrayToSend.push(exerciseObject);
             separation = separation + 3;
         }
@@ -81,13 +92,18 @@ function CreateWorkout() {
         let inputsDom = [];
         for (let i = 0; i < exerciseNumber; i++) {
             inputsDom.push(
-                <div className="exercisesInputs">
+                <div className="exercisesInputs" key={i}>
                     <label htmlFor={"exoname" + i}>Exercise's Name :</label>
                     <input type="text" name={"exoname" + i} />
-                    {/* <label htmlFor={"exoNbSet" + i}>Set number:</label>
-          <input type="text" name={"exoNbSet" + i} /> */}
                     <label htmlFor={"recuperation" + i}>Recuperation :</label>
-                    <input type="text" name={"recuperation" + i} />
+                    <select name={"recuperation" + i}>
+                        {arrayOfPossibleRecup.map((recup, i) => (
+                            <option value={recup} key={i}>
+                                {recup}
+                            </option>
+                        ))}
+                    </select>
+
                     <label htmlFor={"weight" + i}>Weight :</label>
                     <input type="text" name={"weight" + i} />
                 </div>
@@ -99,10 +115,7 @@ function CreateWorkout() {
     return (
         <div className="creatWorkout_container">
             <Link to="/main" className="btGoBackMainPage">
-                <Button
-                    variant="contained"
-                    className="multiRoundedButton_white"
-                >
+                <Button variant="contained" className="simpleButton">
                     <ArrowBackIosNewIcon className="icon-in-button" />
                 </Button>
             </Link>
@@ -132,22 +145,23 @@ function CreateWorkout() {
                     <div className="fixed_container">
                         <Button
                             variant="contained"
-                            className="multiRoundedButton_white"
+                            className="simpleButton"
                             onClick={() => {
                                 setexerciseNumber(exerciseNumber + 1);
                             }}
                         >
                             <AddIcon className="icon-in-button" />
-                            Add exercise
+                            Ajouter un exercice
                         </Button>
                         <Button
                             variant="contained"
-                            className="multiRoundedButton_white btAddExo"
+                            className="simpleButton"
                             onClick={() => {
-                                setexerciseNumber(exerciseNumber - 1);
+                                if (exerciseNumber > 1)
+                                    setexerciseNumber(exerciseNumber - 1);
                             }}
                         >
-                            <RemoveIcon className="icon-in-button" />
+                            <RemoveIcon />
                         </Button>
                     </div>
                 </div>

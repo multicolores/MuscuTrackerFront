@@ -123,6 +123,17 @@ nav {
     padding: 12px 25px !important;
 }
 
+.blueButton {
+    background: $font-color !important;
+    color: $bg_color !important;
+    font-weight: 900 !important;
+    padding: 12px 25px !important;
+    &:hover {
+        background: $primary_yellow !important;
+        color: $font-color !important;
+    }
+}
+
 .simpleBorderButton {
     background: rgba(255, 0, 0, 0) !important;
     color: $bg_color !important;
@@ -226,13 +237,30 @@ nav {
     }
     &:hover {
         background: $font_color !important;
-        border: 2px solid $bg_color !important;
         color: $bg_color !important;
         letter-spacing: 3px !important;
+        box-shadow: none !important;
         &::after {
             top: 6px;
             left: 7px;
         }
+        .icon-in-button {
+            transform: translateX(-10px);
+        }
+    }
+}
+
+.simpleButton {
+    background: $bg_color !important;
+    color: $font_color !important;
+    border-radius: 10px !important;
+    @include transition;
+    font-size: 0.875rem !important;
+    &:hover {
+        background: $font_color !important;
+        background: $back_bg_color !important;
+        color: $bg_color !important;
+        letter-spacing: 3px !important;
         .icon-in-button {
             transform: translateX(-10px);
         }
