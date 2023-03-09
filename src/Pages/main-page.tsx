@@ -9,10 +9,9 @@ import Workout from "../components/Workout";
 
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import "../styles/main-page.scss";
-import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import OverallStats from "../components/OverallSatats";
 import OverallGraphStat from "../components/OverallGraphStat";
 import PoidsGraphStat from "../components/PoidsGraphStat";
@@ -142,7 +141,7 @@ function MainPage() {
                     <span className="userName">{data.user.name}</span>
                     <Button
                         variant="contained"
-                        className="btCreateTraining gradientButton"
+                        className="btCreateTraining blueButton"
                         onClick={() => {
                             toCreateWorkout();
                         }}
@@ -155,7 +154,6 @@ function MainPage() {
                         onClick={Logout}
                     >
                         <LockIcon className="icon-in-button" />
-                        Logout
                     </Button>
 
                     <div className="stats-container">
