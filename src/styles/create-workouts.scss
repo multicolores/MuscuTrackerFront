@@ -94,6 +94,7 @@
                 }
             }
         }
+
         label {
             display: inline-block;
             padding-top: 8%;
@@ -103,6 +104,9 @@
             &:first-child {
                 padding-top: 0;
             }
+        }
+        .workoutdescription_input {
+            width: 100%;
         }
         .exercisesInputs {
             padding: 4vh 5vw;
