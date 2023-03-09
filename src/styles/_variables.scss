@@ -26,6 +26,8 @@ $primary_red: #ff6392;
 $ollow_blue: #6fffe9;
 // $violet: #9fa0ff;
 
+$mobile_breakpoint: 700px;
+
 $ease_out: cubic-bezier(0.165, 0.84, 0.44, 1);
 @mixin transition() {
     transition: 700ms $ease_out !important;

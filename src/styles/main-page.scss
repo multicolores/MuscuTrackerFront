@@ -20,8 +20,9 @@
         position: absolute;
         top: 4vh;
         right: 8vw;
-        @media (max-width: 400px) {
+        @media (max-width: $mobile_breakpoint) {
             right: 5vw;
+            top: 11vh;
         }
     }
 
@@ -39,9 +40,9 @@
         &:hover {
             background-color: rgba(0, 0, 0, 0);
         }
-        // border-radius: 5px !important;
-        @media (max-width: 400px) {
-            top: 11vh;
+
+        @media (max-width: $mobile_breakpoint) {
+            top: 2vh;
         }
     }
     .MuiSvgIcon-root {
@@ -56,6 +57,15 @@
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
         gap: 3vw;
+
+        @media (max-width: $mobile_breakpoint) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 12vh;
+            gap: 2vh;
+        }
 
         & > div {
             border-radius: 25px;
@@ -102,21 +112,35 @@
                 margin-top: 5px;
                 @include transition;
             }
+
+            @media (max-width: $mobile_breakpoint) {
+                height: 200px;
+            }
         }
         .overallGraphSatatComponentContainer {
             border: 3px solid $font_color;
             border-radius: 10px;
             box-shadow: 0 0.375em 0 rgba(0, 0, 0, 0.9);
             overflow: hidden;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
 
             grid-column-start: 2;
             grid-column-end: 3;
             grid-row-start: 1;
             grid-row-end: 3;
+
             @include transition;
 
             &:hover {
                 transform: scale(1.1);
+            }
+
+            @media (max-width: $mobile_breakpoint) {
+                & > div {
+                    transform: scale(0.7);
+                }
             }
         }
         .workoutsComponentsContainer {
@@ -154,7 +178,7 @@
                     bottom: -30px;
                     @include transition;
                     text-align: center;
-                    background: white;
+                    background: $bg_color;
                 }
 
                 &:hover {
@@ -167,6 +191,11 @@
             }
             svg {
                 overflow: visible;
+            }
+
+            @media (max-width: $mobile_breakpoint) {
+                height: 200px;
+                width: 100%;
             }
         }
     }
