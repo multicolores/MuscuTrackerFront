@@ -20,7 +20,6 @@ function Workout(props: any) {
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [AddTrainingbt, setAddTrainingbt] = useState(false);
     const [showWorkout, setShowWorkout] = useState(false);
 
     const [confirmDialog, setConfirmDialog] = useState({
@@ -30,11 +29,6 @@ function Workout(props: any) {
         onConfirm: () => {
             buttonDeleteWorkout();
         },
-    });
-    const [addTrainingDialog, setAddTrainingDialog] = useState({
-        isOpen: false,
-        workout: { repetition: [[0]] },
-        onConfirm: null,
     });
 
     const workout_id = props.workout_id;
@@ -68,7 +62,7 @@ function Workout(props: any) {
         let items = [];
         for (let i = 0; i < data.exercise.length; i++) {
             items.push(
-                <div className="exerciseTable">
+                <div className="exerciseTable" key={i}>
                     <div className="content_container">
                         <AddTrainingDialog
                             exercise={data.exercise[i]}
@@ -174,7 +168,9 @@ function Workout(props: any) {
                             }}
                         >
                             <h2>{data.name}</h2>
-                            <span className="date">12/03/2022</span>
+                            <span className="date">
+                                {new Date(data.date).toLocaleString()}
+                            </span>
                             <span className="description">
                                 {data.description}
                             </span>

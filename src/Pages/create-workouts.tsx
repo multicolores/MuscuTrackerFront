@@ -35,7 +35,7 @@ function CreateWorkout() {
     const [notify, setNotify] = useState({
         isOpen: false,
         message: "",
-        type: "",
+        type: "success",
     });
 
     const user = location.state["user"];
@@ -44,7 +44,7 @@ function CreateWorkout() {
         let formArray = [];
         let exercisesArrayToSend = [];
 
-        for (let i = 1; i < e.target.length - 2; i++) {
+        for (let i = 2; i < e.target.length - 2; i++) {
             formArray.push(e.target[i].value);
         }
 
@@ -68,7 +68,7 @@ function CreateWorkout() {
         let workoutObject = {
             name: e.target[0].value,
             exercise: exercisesArrayToSend,
-            description: "Description de la scéance",
+            description: e.target[1].value,
         };
 
         if (createWorkout(user, workoutObject, cookies.user)) {
@@ -123,8 +123,19 @@ function CreateWorkout() {
                 <h1>Create a workout</h1>
                 <form onSubmit={CreateTheWorkout}>
                     <div>
-                        <label htmlFor="workoutname">Workout's Name :</label>
+                        <label htmlFor="workoutname">
+                            Nom de l'entrainement :
+                        </label>
                         <input type="text" name="workoutname" />
+
+                        <label htmlFor="workoutdescription">
+                            Description de l'entrainement:
+                        </label>
+                        <input
+                            type="text"
+                            name="workoutdescription"
+                            className="workoutdescription_input"
+                        />
                     </div>
 
                     {exercisesInputs()}

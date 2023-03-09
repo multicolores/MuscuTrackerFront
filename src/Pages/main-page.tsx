@@ -32,7 +32,7 @@ function MainPage() {
     const [notify, setNotify] = useState({
         isOpen: false,
         message: "",
-        type: "",
+        type: "success",
     });
 
     useEffect(() => {
@@ -153,7 +153,7 @@ function MainPage() {
                         className="btLogout"
                         onClick={Logout}
                     >
-                        <LockIcon className="icon-in-button" />
+                        <LockIcon />
                     </Button>
 
                     <div className="stats-container">

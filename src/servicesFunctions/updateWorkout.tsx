@@ -13,7 +13,7 @@ export async function updateWorkout(
 
     let res = await axios.patch(
         process.env.REACT_APP_API_URL + "/workout/" + workoutData._id,
-        { exercise: workoutData.exercise }
+        { exercise: workoutData.exercise, date: Date.now() }
     );
     return res.data;
 }
