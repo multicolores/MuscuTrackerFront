@@ -34,16 +34,34 @@
     .weightRecup_input {
         padding: 3vh 0;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
+        gap: 50px;
+        @media (max-width: $mobile_breakpoint) {
+            overflow-x: hidden;
+            padding: 3vh 10%;
+        }
         div {
             width: 30%;
             display: flex;
             justify-content: space-around;
             align-items: center;
+
+            @media (max-width: $mobile_breakpoint) {
+                &.recup {
+                    width: 65px;
+                }
+                span {
+                    padding: 0;
+                }
+            }
             input {
                 width: 100px;
                 padding-bottom: 5px;
                 border-bottom: none;
+
+                @media (max-width: $mobile_breakpoint) {
+                    width: 40px;
+                }
             }
             span {
                 @include transition;
@@ -60,6 +78,7 @@
                 }
             }
         }
+
         svg {
             color: $bg_color;
             @include transition;

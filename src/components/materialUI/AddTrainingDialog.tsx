@@ -21,7 +21,7 @@ export default function AddTrainingDialog(props: any) {
     const [notify, setNotify] = useState({
         isOpen: false,
         message: "",
-        type: "",
+        type: "success",
     });
     const [recup, setRecup] = useState(props.exercise.recuperation);
     const [weight, setWeight] = useState(props.exercise.weight);

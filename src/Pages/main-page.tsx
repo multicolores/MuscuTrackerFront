@@ -138,7 +138,7 @@ function MainPage() {
             )}
             {data && (
                 <header className="header-main-page-container">
-                    <span className="userName">{data.user.name}</span>
+                    {/* <span className="userName">{data.user.name}</span> */}
                     <Button
                         variant="contained"
                         className="btCreateTraining blueButton"
@@ -174,6 +174,20 @@ function MainPage() {
                             )}
                         </div>
 
+                        <div className="workoutsComponentsContainer">
+                            {/* <KeyboardDoubleArrowDownIcon className="scroll-down-icon" /> */}
+                            {workout &&
+                                workout.map((id: any) => (
+                                    <Workout
+                                        workout_id={id}
+                                        user={data.user}
+                                        notify={notify}
+                                        reloadDatas={reloadDatas}
+                                        setNotify={setNotify}
+                                    />
+                                ))}
+                        </div>
+
                         <div className="overallGraphSatatComponentContainer">
                             {allWorkoutsLoading && (
                                 <div className="loadingContainer">
@@ -188,21 +202,6 @@ function MainPage() {
                                 data.user.workout.length && (
                                 <OverallGraphStat workouts={allWorkoutsDatas} />
                             )}
-                        </div>
-
-                        <div className="workoutsComponentsContainer">
-                            {/* <KeyboardDoubleArrowDownIcon className="scroll-down-icon" /> */}
-                            {workout &&
-                                workout.map((id: any) => (
-                                    <Workout
-                                        workout_id={id}
-                                        key={id}
-                                        user={data.user}
-                                        notify={notify}
-                                        reloadDatas={reloadDatas}
-                                        setNotify={setNotify}
-                                    />
-                                ))}
                         </div>
 
                         <div className="overAllStatsComponentContainer">
