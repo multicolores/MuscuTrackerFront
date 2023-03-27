@@ -23,7 +23,7 @@
         z-index: 2;
         position: relative;
         box-shadow: 0 0.375em 0 $font_color;
-        @media (max-width: 400px) {
+        @media (max-width: 500px) {
             width: 80vw;
         }
         div {
