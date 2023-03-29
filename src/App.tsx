@@ -19,7 +19,7 @@ function App() {
                             alt="lgoo de l'application"
                             className="logo"
                         />
-                        Muscu App
+                        MuscuTracker
                     </Link>
                 </nav>
                 <Routes>
