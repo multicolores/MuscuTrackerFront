@@ -5,20 +5,9 @@ export function createWorkout(
     workoutToCreate: any,
     token: any
 ): boolean {
-    // ne prend pas encore de token en header
-    //   console.log(trainingArray);
-    //   console.log(workoutData);
-    //   console.log(referenceExercise);
-
-    // const options = {
-    //   headers: {
-    //       "auth-token": cookies.user,
-    //   }
-    //  }
-
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "auth-token": token },
         body: JSON.stringify(workoutToCreate),
     };
     fetch(process.env.REACT_APP_API_URL + "/workout", requestOptions)

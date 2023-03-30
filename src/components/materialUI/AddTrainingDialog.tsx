@@ -15,8 +15,10 @@ import {
 import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { useCookies } from "react-cookie";
 
 export default function AddTrainingDialog(props: any) {
+    const [cookies, setCookie] = useCookies(["user"]);
     const [open, setOpen] = useState(false);
     const [notify, setNotify] = useState({
         isOpen: false,
@@ -71,7 +73,12 @@ export default function AddTrainingDialog(props: any) {
             }
         }
 
-        await updateWorkout(FinalArray, props.workout, props.exercise);
+        await updateWorkout(
+            FinalArray,
+            props.workout,
+            props.exercise,
+            cookies.user
+        );
         setNotify({
             isOpen: true,
             message: "Sets has been created",

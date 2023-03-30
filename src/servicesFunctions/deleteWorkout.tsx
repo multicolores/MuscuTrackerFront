@@ -5,8 +5,15 @@ export async function deleteWorkout(
     workoutIdToDelete: any,
     token: any
 ) {
+    const options = {
+        headers: {
+            "auth-token": token,
+        },
+    };
+
     const res = await axios.delete(
-        process.env.REACT_APP_API_URL + "/workout/" + workoutIdToDelete
+        process.env.REACT_APP_API_URL + "/workout/" + workoutIdToDelete,
+        options
     );
 
     if (res.status === 200) {

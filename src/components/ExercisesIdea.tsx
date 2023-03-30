@@ -1,11 +1,13 @@
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 import { MusclesEnum } from "../assets/musclesEnum";
 
 import "./ExercisesIdeaStyle.scss";
 
 const ExercisesIdea = () => {
+    const [cookies, setCookie] = useCookies(["user"]);
     const [exercisesList, setExercisesList] = useState<any>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -20,7 +22,11 @@ const ExercisesIdea = () => {
         setSelectedMuscle(muscle);
 
         axios
-            .get(process.env.REACT_APP_API_URL + "/exercise?muscle=" + muscle)
+            .get(process.env.REACT_APP_API_URL + "/exercise?muscle=" + muscle, {
+                headers: {
+                    "auth-token": cookies.user,
+                },
+            })
             .then((res) => {
                 setExercisesList(res.data);
                 setError(null);
