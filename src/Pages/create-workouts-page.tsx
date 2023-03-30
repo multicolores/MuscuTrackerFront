@@ -12,6 +12,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import ExercisesIdea from "../components/ExercisesIdea";
 
 const arrayOfPossibleRecup = [
     "45s",
@@ -161,8 +162,7 @@ function CreateWorkout() {
                                 setexerciseNumber(exerciseNumber + 1);
                             }}
                         >
-                            <AddIcon className="icon-in-button" />
-                            Ajouter un exercice
+                            <AddIcon />
                         </Button>
                         <Button
                             variant="contained"
@@ -179,11 +179,7 @@ function CreateWorkout() {
             </div>
 
             <div className="right_side_container">
-                <img
-                    src={create_workout_image}
-                    alt="create_workout logo musculation"
-                    className="image_container"
-                />
+                <ExercisesIdea />
             </div>
 
             <Notification notify={notify} setNotify={setNotify} />
