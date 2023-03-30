@@ -13,6 +13,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
     }
 
     @media (max-width: 400px) {
@@ -50,7 +51,7 @@
             justify-content: center;
             position: fixed;
             gap: 15px;
-            left: 60%;
+            left: 50%;
             transform: translateX(-110%);
 
             @media (max-width: 800px) {
@@ -62,8 +63,8 @@
     }
 
     .form_container {
-        width: 60%;
-        padding: 7vh 10vw;
+        width: 50%;
+        padding: 7vh 7vw;
         position: relative;
         @media (max-width: 800px) {
             width: 100%;
@@ -150,13 +151,11 @@
         }
     }
     .right_side_container {
-        background-color: #e2ded9;
-        z-index: -1;
         height: 100vh;
         position: fixed;
         top: 0;
         right: 0;
-        width: 40vw;
+        width: 50vw;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -164,7 +163,9 @@
             width: 100%;
         }
         @media (max-width: 800px) {
-            display: none;
+            position: relative;
+            margin-top: 10vh;
+            width: 100%;
         }
     }
 }
