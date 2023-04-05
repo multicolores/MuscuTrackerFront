@@ -59,7 +59,7 @@ function CreateWorkout() {
                 name: objectArray[0],
                 repetition: "",
                 recuperation: objectArray[1],
-                weight: objectArray[2],
+                weight: objectArray[2] + "kg",
             };
 
             exercisesArrayToSend.push(exerciseObject);
@@ -106,7 +106,10 @@ function CreateWorkout() {
                     </select>
 
                     <label htmlFor={"weight" + i}>Weight :</label>
-                    <input type="text" name={"weight" + i} />
+                    <div>
+                        <input type="number" name={"weight" + i} min="0" />
+                        <span className="create-workouts--kg-info">kg</span>
+                    </div>
                 </div>
             );
         }

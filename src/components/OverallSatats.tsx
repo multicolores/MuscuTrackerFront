@@ -45,7 +45,7 @@ function OverallStats(props: { workouts: any[] }) {
                     </div>
                     <div className="repNumber">
                         <h3>{data.repsNumber}</h3>
-                        <span>nombre total de répétition effectuer</span>
+                        <span>nombre total de répétition effectuée</span>
                     </div>
                 </>
             )}
