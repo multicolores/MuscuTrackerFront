@@ -62,7 +62,7 @@
         // top: 5vh;
         background-color: $bg_color;
         border-radius: 100%;
-        @media (max-width: 400px) {
+        @media (max-width: $mobile_breakpoint) {
             top: 6vh;
             right: 6vw;
         }
@@ -147,7 +147,7 @@
     h1 {
         font-size: 5vw;
         padding: 7vh 0;
-        @media (max-width: 400px) {
+        @media (max-width: $mobile_breakpoint) {
             font-size: 4em !important;
         }
     }
@@ -180,16 +180,16 @@
         .content_container {
             position: relative;
             width: 52%;
-            @media (max-width: 400px) {
+            @media (max-width: $mobile_breakpoint) {
                 width: 100%;
                 margin-left: 5%;
             }
         }
         .graphique_container {
             // z-index: 2;
-            @media (max-width: 400px) {
+            @media (max-width: $mobile_breakpoint) {
                 // transform: translateX(-50%);
-                transform: scale(0.7) translateX(-30%);
+                transform: scale(0.8) translateX(-15%);
             }
             tspan {
                 font-size: 1em !important;
@@ -212,14 +212,16 @@
             padding: 5% 0;
             margin-left: 10%;
             max-height: 50vh;
-            overflow: scroll;
+            overflow-x: visible;
+            overflow-y: scroll;
             margin-top: 5vh;
             // margin-left: 50%;
             // transform: translateX(-50%);
-            @media (max-width: 400px) {
-                width: 100%;
-                margin-left: 50%;
-                transform: translateX(-50%);
+            @media (max-width: $mobile_breakpoint) {
+                width: 50vw;
+                margin-left: 5%;
+                overflow: visible;
+                max-height: none;
             }
             .repRow {
                 display: flex;
@@ -227,7 +229,7 @@
                 align-items: center;
                 padding: 3% 0;
                 font-size: 1.3em;
-                @media (max-width: 400px) {
+                @media (max-width: $mobile_breakpoint) {
                     font-size: 1em;
                 }
                 .reps {

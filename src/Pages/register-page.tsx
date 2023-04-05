@@ -54,7 +54,6 @@ function Register() {
                             type: "error",
                         });
                     } else {
-                        console.log("Error", error.message);
                         setNotify({
                             isOpen: true,
                             message: "Error" + " : " + error.message,

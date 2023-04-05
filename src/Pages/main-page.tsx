@@ -51,7 +51,6 @@ function MainPage() {
                 setError(null);
             })
             .catch((err) => {
-                console.log(err.message);
                 setError(err.message);
                 setData(null);
                 navigate("/login", { state: data });
@@ -101,7 +100,6 @@ function MainPage() {
     const fetchAllWorkoutsData = (workoutsIds: string[]) => {
         setAllWorkoutsDatas([]);
         workoutsIds.map((workoutId) => {
-            // console.log(workoutId);
             axios
                 .get(process.env.REACT_APP_API_URL + "/workout/" + workoutId, {
                     headers: {
@@ -109,7 +107,6 @@ function MainPage() {
                     },
                 })
                 .then((res) => {
-                    console.log(res.data);
                     setAllWorkoutsDatas((oldData: any) => [
                         ...oldData,
                         res.data,
@@ -117,7 +114,6 @@ function MainPage() {
                     setAllWorkoutsError(null);
                 })
                 .catch((err) => {
-                    console.log(err.message);
                     setAllWorkoutsError(err.message);
                     setAllWorkoutsDatas(null);
                 })
@@ -146,7 +142,7 @@ function MainPage() {
                             toCreateWorkout();
                         }}
                     >
-                        Create a Workout
+                        Créer un entrainement
                     </Button>
                     <Button
                         variant="contained"
@@ -156,57 +152,10 @@ function MainPage() {
                         <LockIcon />
                     </Button>
 
-                    <div className="stats-container">
-                        {/* todo: regroupper toussa dans le même componsant ? a voir ( faire attentions au grid aussi ) */}
-                        <div className="overallSatatsComponentContainer">
-                            {allWorkoutsLoading && (
-                                <div className="loadingContainer">
-                                    <CircularProgress />
-                                </div>
-                            )}
-                            {allWorkoutsError && (
-                                <div>{`There was a problem while fetching user data - ${error}`}</div>
-                            )}
-
-                            {allWorkoutsDatas.length >=
-                                data.user.workout.length && (
-                                <OverallStats workouts={allWorkoutsDatas} />
-                            )}
-                        </div>
-
-                        <div className="workoutsComponentsContainer">
-                            {/* <KeyboardDoubleArrowDownIcon className="scroll-down-icon" /> */}
-                            {workout &&
-                                workout.map((id: any) => (
-                                    <Workout
-                                        workout_id={id}
-                                        user={data.user}
-                                        notify={notify}
-                                        reloadDatas={reloadDatas}
-                                        setNotify={setNotify}
-                                    />
-                                ))}
-                        </div>
-
-                        <div className="overallGraphSatatComponentContainer">
-                            {allWorkoutsLoading && (
-                                <div className="loadingContainer">
-                                    <CircularProgress />
-                                </div>
-                            )}
-                            {allWorkoutsError && (
-                                <div>{`There was a problem while fetching user data - ${error}`}</div>
-                            )}
-
-                            {allWorkoutsDatas.length >=
-                                data.user.workout.length && (
-                                <OverallGraphStat workouts={allWorkoutsDatas} />
-                            )}
-                        </div>
-
-                        <div className="overAllStatsComponentContainer">
-                            {/* poids stats */}
-                            <div>
+                    {workout.length > 0 && (
+                        <div className="stats-container">
+                            {/* todo: regroupper toussa dans le même componsant ? a voir ( faire attentions au grid aussi ) */}
+                            <div className="overallSatatsComponentContainer">
                                 {allWorkoutsLoading && (
                                     <div className="loadingContainer">
                                         <CircularProgress />
@@ -215,16 +164,29 @@ function MainPage() {
                                 {allWorkoutsError && (
                                     <div>{`There was a problem while fetching user data - ${error}`}</div>
                                 )}
+
                                 {allWorkoutsDatas.length >=
                                     data.user.workout.length && (
-                                    <PoidsGraphStat
-                                        workouts={allWorkoutsDatas}
-                                    />
+                                    <OverallStats workouts={allWorkoutsDatas} />
                                 )}
                             </div>
 
-                            {/* poids stats ( to change en une autre donné biensur :)  */}
-                            <div>
+                            <div className="workoutsComponentsContainer">
+                                {/* <KeyboardDoubleArrowDownIcon className="scroll-down-icon" /> */}
+                                {workout &&
+                                    workout.map((id: any) => (
+                                        <Workout
+                                            workout_id={id}
+                                            user={data.user}
+                                            notify={notify}
+                                            reloadDatas={reloadDatas}
+                                            setNotify={setNotify}
+                                            key={id}
+                                        />
+                                    ))}
+                            </div>
+
+                            <div className="overallGraphSatatComponentContainer">
                                 {allWorkoutsLoading && (
                                     <div className="loadingContainer">
                                         <CircularProgress />
@@ -233,15 +195,69 @@ function MainPage() {
                                 {allWorkoutsError && (
                                     <div>{`There was a problem while fetching user data - ${error}`}</div>
                                 )}
+
                                 {allWorkoutsDatas.length >=
                                     data.user.workout.length && (
-                                    <RecupGraphStat
+                                    <OverallGraphStat
                                         workouts={allWorkoutsDatas}
                                     />
                                 )}
                             </div>
+
+                            <div className="overAllStatsComponentContainer">
+                                {/* poids stats */}
+                                <div>
+                                    {allWorkoutsLoading && (
+                                        <div className="loadingContainer">
+                                            <CircularProgress />
+                                        </div>
+                                    )}
+                                    {allWorkoutsError && (
+                                        <div>{`There was a problem while fetching user data - ${error}`}</div>
+                                    )}
+                                    {allWorkoutsDatas.length >=
+                                        data.user.workout.length && (
+                                        <PoidsGraphStat
+                                            workouts={allWorkoutsDatas}
+                                        />
+                                    )}
+                                </div>
+
+                                {/* poids stats ( to change en une autre donné biensur :)  */}
+                                <div>
+                                    {allWorkoutsLoading && (
+                                        <div className="loadingContainer">
+                                            <CircularProgress />
+                                        </div>
+                                    )}
+                                    {allWorkoutsError && (
+                                        <div>{`There was a problem while fetching user data - ${error}`}</div>
+                                    )}
+                                    {allWorkoutsDatas.length >=
+                                        data.user.workout.length && (
+                                        <RecupGraphStat
+                                            workouts={allWorkoutsDatas}
+                                        />
+                                    )}
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    )}
+
+                    {workout.length <= 0 && (
+                        <div className="main-page--no-workout-container">
+                            <h2>Vous n'avez aucun entrainement</h2>
+                            <Button
+                                variant="contained"
+                                className="blueButton"
+                                onClick={() => {
+                                    toCreateWorkout();
+                                }}
+                            >
+                                Créer un entrainement
+                            </Button>
+                        </div>
+                    )}
                 </header>
             )}
 

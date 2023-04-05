@@ -118,6 +118,13 @@
                 width: 100%;
             }
             box-shadow: 0 0.375em 0 rgba(0, 0, 0, 0.9);
+
+            div {
+                .create-workouts--kg-info {
+                    margin-left: 8px;
+                    font-weight: 500;
+                }
+            }
         }
         .submitButton {
             position: absolute;

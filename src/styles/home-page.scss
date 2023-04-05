@@ -117,11 +117,12 @@
                 width: 100%;
                 padding: 20px;
                 h1 {
-                    font-size: 2.5em !important;
+                    font-size: 7vw !important;
                 }
             }
             .buttonsContainer {
                 display: flex;
+                transform: scale(0.9);
             }
         }
     }
@@ -169,6 +170,10 @@
 
     @media (max-width: 500px) {
         padding: 15vh 2vw;
+        height: auto;
+        h1 {
+            font-size: 2.5em !important;
+        }
         .contered-image-container {
             opacity: 0.1;
             width: 30%;
@@ -257,7 +262,7 @@
 
         .text-container {
             h2 {
-                font-size: 2em;
+                font-size: 1.7em;
             }
         }
     }

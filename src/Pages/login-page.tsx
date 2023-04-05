@@ -54,7 +54,6 @@ function Login() {
                         type: "error",
                     });
                 } else {
-                    console.log("Error", error.message);
                     setNotify({
                         isOpen: true,
                         message:
