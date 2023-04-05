@@ -51,7 +51,6 @@ function MainPage() {
                 setError(null);
             })
             .catch((err) => {
-                console.log(err.message);
                 setError(err.message);
                 setData(null);
                 navigate("/login", { state: data });
@@ -101,7 +100,6 @@ function MainPage() {
     const fetchAllWorkoutsData = (workoutsIds: string[]) => {
         setAllWorkoutsDatas([]);
         workoutsIds.map((workoutId) => {
-            // console.log(workoutId);
             axios
                 .get(process.env.REACT_APP_API_URL + "/workout/" + workoutId, {
                     headers: {
@@ -109,7 +107,6 @@ function MainPage() {
                     },
                 })
                 .then((res) => {
-                    console.log(res.data);
                     setAllWorkoutsDatas((oldData: any) => [
                         ...oldData,
                         res.data,
@@ -117,7 +114,6 @@ function MainPage() {
                     setAllWorkoutsError(null);
                 })
                 .catch((err) => {
-                    console.log(err.message);
                     setAllWorkoutsError(err.message);
                     setAllWorkoutsDatas(null);
                 })
@@ -185,6 +181,7 @@ function MainPage() {
                                             notify={notify}
                                             reloadDatas={reloadDatas}
                                             setNotify={setNotify}
+                                            key={id}
                                         />
                                     ))}
                             </div>
