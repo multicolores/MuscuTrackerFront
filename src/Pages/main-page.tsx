@@ -16,6 +16,7 @@ import OverallStats from "../components/OverallSatats";
 import OverallGraphStat from "../components/OverallGraphStat";
 import PoidsGraphStat from "../components/PoidsGraphStat";
 import RecupGraphStat from "../components/RecupGraphStat";
+import UserInfo from "../components/UserInfo";
 
 function MainPage() {
     const [data, setData] = useState<any>(null);
@@ -151,6 +152,10 @@ function MainPage() {
                     >
                         <LockIcon />
                     </Button>
+
+                    {allWorkoutsDatas && userinfo && (
+                        <UserInfo workouts={allWorkoutsDatas} user={userinfo} />
+                    )}
 
                     {workout.length > 0 && (
                         <div className="stats-container">
