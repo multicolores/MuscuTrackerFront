@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -24,11 +24,6 @@ function Register() {
 
     function RegisterPostRequest() {
         //* attention il faut avoir le bon nombre de lettre ect...
-        var jsonRegisterInfo = {
-            name: name,
-            email: email,
-            password: password,
-        };
         if (captchaRef.current && captchaRef.current.getValue()) {
             axios
                 .post(process.env.REACT_APP_API_URL + `/register`, {

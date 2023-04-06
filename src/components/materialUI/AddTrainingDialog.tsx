@@ -28,8 +28,6 @@ export default function AddTrainingDialog(props: any) {
     const [recup, setRecup] = useState(props.exercise.recuperation);
     const [weight, setWeight] = useState(props.exercise.weight);
 
-    const exerciseTab = props.exercise;
-
     const handleClickOpen = () => {
         setOpen(true);
     };

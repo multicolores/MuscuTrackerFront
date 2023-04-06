@@ -7,7 +7,6 @@ import Notification from "../components/materialUI/Notification";
 import { createWorkout } from "../servicesFunctions/createWorkout";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
-import create_workout_image from "../images/create_workout_image.png";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";

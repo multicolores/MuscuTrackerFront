@@ -1,12 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { useCookies } from "react-cookie";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./WorkoutStyle.scss";
 
 function OverallStats(props: { workouts: any[] }) {
-    const [cookies, setCookie] = useCookies(["user"]);
     const [data, setData] = useState({ trainingsNumber: 0, repsNumber: 0 });
 
     useEffect(() => {

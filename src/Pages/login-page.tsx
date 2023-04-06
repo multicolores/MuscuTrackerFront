@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { TextField } from "@mui/material";
 import Notification from "../components/materialUI/Notification";
 import Button from "@mui/material/Button";
@@ -11,7 +11,6 @@ import Waves from "../components/Waves";
 function Login() {
     const [email, setEmail] = useState<String | null>(null);
     const [password, setPassword] = useState<String | null>(null);
-    const [userdata, setuserdata] = useState(null);
     const [cookies, setCookie] = useCookies(["user"]);
     const [notify, setNotify] = useState({
         isOpen: false,
